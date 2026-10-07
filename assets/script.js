@@ -1,180 +1,3651 @@
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const IC={plus:'M12 5v14M5 12h14',x:'M6 6l12 12M18 6L6 18',sliders:'M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4',search:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4',trash:'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',edit:'M4 20l4-1 11-11-3-3L5 16l-1 4z',download:'M12 4v11M7 11l5 5 5-5M5 20h14',upload:'M12 16V5M7 9l5-5 5 5M5 20h14',reset:'M4 12a8 8 0 1 0 3-6.2M4 4v4h4',print:'M7 9V4h10v5M7 17H5v-6h14v6h-2M7 14h10v6H7z',info:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v5M12 8v.01',wallet:'M3 7h15a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7zM3 7l12-3v3M17 14h.01',up:'M12 19V5M6 11l6-6 6 6',down:'M12 5v14M6 13l6 6 6-6',chart:'M4 20V4M4 20h16M8 15l4-4 3 3 5-6',target:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 12h.01',calendar:'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4',star:'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z',bell:'M6 16v-5a6 6 0 1 1 12 0v5l2 2H4l2-2zM10 21h4',sun:'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5',palette:'M12 3a9 9 0 1 0 0 18c1.3 0 1.9-1 1.5-1.9-.4-1.1.3-2.1 1.5-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10zM7.5 11h.01M10 7h.01M15 7.5h.01',layers:'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',globe:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',type:'M5 6V4h14v2M12 4v16M9 20h6',chevl:'M15 5l-7 7 7 7',chevr:'M9 5l7 7-7 7',check:'M5 12.5l4.5 4.5L19 7',food:'M7 3v7a2 2 0 0 0 4 0V3M9 3v18M17 3c-2 2-3 5-3 8h3v10',home:'M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6',car:'M4 16h16v3H4zM6 16l1.6-5h8.8L18 16M7 19v1.5M17 19v1.5',bag:'M5 8h14l-1 12H6L5 8zM9 8a3 3 0 0 1 6 0',heart:'M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z',film:'M4 5h16v14H4zM8 5v14M16 5v14M4 9h4M4 15h4M16 9h4M16 15h4',book:'M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2V5zM8 7h8',bolt:'M13 3L5 14h6l-1 7 8-11h-6l1-7z',plane:'M3 13l18-8-6 15-3-6-9-1z',gift:'M4 9h16v4H4zM6 13v8h12v-8M12 9v12M12 9c-2 0-4-1-4-3s3-2 4 3c1-5 4-5 4-3s-2 3-4 3',tag:'M3 12V4h8l10 10-8 8L3 12zM7.5 8h.01',spark:'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z',list:'M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01',eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',corner:'M4 20V11a7 7 0 0 1 7-7h9',kbd:'M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10',coin:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM14.5 9a3 3 0 0 0-5 1c0 3 5 1.5 5 4.5a3 3 0 0 1-5 1M12 6.5v1.5M12 16v1.5',pie:'M12 3v9h9a9 9 0 1 1-9-9zM15 3a9 9 0 0 1 6 6h-6V3z',inbox:'M3 13l3-8h12l3 8v6H3v-6zM3 13h5l1 3h6l1-3h5'};
-document.body.insertAdjacentHTML('afterbegin',`<svg width="0" height="0" style="position:absolute">${Object.entries(IC).map(([k,v])=>`<symbol id="i-${k}" viewBox="0 0 24 24"><path d="${v}"/></symbol>`).join('')}</svg>`);
-const ic=n=>`<svg class="ic"><use href="#i-${n}"/></svg>`;
-const P=s=>Object.fromEntries(s.split('|').map(x=>{const i=x.indexOf('=');return[x.slice(0,i),x.slice(i+1)]}));
-const L={fa:P("app=خرج‌یار|sub=مدیریت هوشمند درآمد و هزینه|foot=خرج‌یار · داده‌ها فقط روی دستگاه شما ذخیره می‌شوند|bal=تراز این دوره|inc=درآمد|exp=هزینه|sav=نرخ پس‌انداز|add=تراکنش جدید|edit=ویرایش تراکنش|del=حذف|save=ذخیره|cancel=انصراف|amt=مبلغ|cat=دسته‌بندی|date=تاریخ|note=توضیح|tag=برچسب|all=همه|search=جستجو در تراکنش‌ها…|s_new=جدیدترین|s_old=قدیمی‌ترین|s_big=بیشترین مبلغ|empty=هنوز تراکنشی ثبت نشده|ins=تحلیل هوشمند|avgd=میانگین هزینه روزانه|topc=پرخرج‌ترین دسته|proj=پیش‌بینی هزینه پایان ماه|bigx=بزرگ‌ترین هزینه|bud=بودجه‌ها|goals=هدف‌های پس‌انداز|limit=سقف ماهانه|spent=خرج‌شده|left=باقی‌مانده|over=بیش از سقف|gname=نام هدف|gtarget=مبلغ هدف|dep=واریز|tx=تراکنش‌ها|byc=سهم دسته‌ها|trend=روند ۶ ماه اخیر|full=کل زمان|nobud=بودجه‌ای تعیین نشده|nogoal=هدفی تعریف نشده|nodata=داده‌ای برای نمایش نیست|none=بدون|food=خوراک|home=مسکن|car=حمل‌ونقل|shop=خرید|health=سلامت|fun=تفریح|edu=آموزش|bill=قبوض|travel=سفر|gift=هدیه|salary=حقوق|freelance=پروژه|invest=سرمایه‌گذاری|other=سایر|settings=تنظیمات|ssearch=جستجو در تنظیمات…|guide=راهنما|g_back=بازگشت به تنظیمات|t_look=ظاهر|t_bg=پس‌زمینه|t_ui=رابط|t_units=واحدها|t_content=محتوا|t_data=داده‌ها|presets=سبک‌های آماده|theme=تم|light=روشن|dark=تیره|auto=خودکار|sepia=سپیا|midnight=نیمه‌شب|accent=رنگ تأکیدی|card=سبک کارت|glass=شیشه‌ای|solid=توپر|outline=خطی|r=گردی گوشه‌ها|fs=اندازه متن|font=فونت|bg=الگوی پس‌زمینه|plain=ساده|dots=نقطه‌ای|grid=شبکه|lines=خطوط|aurora=شفق|stars=ستاره|bgi=شدت پس‌زمینه|anim=انیمیشن‌ها|rev=انیمیشن ورود هنگام اسکرول|prog=نوار پیشرفت اسکرول|tilt=کارت سه‌بعدی|dense=حالت فشرده|hc=کنتراست بالا|cnt=شمارش متحرک اعداد|glow=درخشش ماوس|lang=زبان|cur=واحد پول|toman=تومان|rial=ریال|usd=دلار|eur=یورو|dg=نوع ارقام|dg_auto=پیش‌فرض|dg_latn=لاتین|dg_arab=عربی|cal=تقویم|jal=شمسی|greg=میلادی|per=نمایش پیش‌فرض|per_m=ماهانه|per_a=کل زمان|sections=نمایش و ترتیب بخش‌ها|s_sum=خلاصه|s_chart=نمودارها|s_bud=بودجه|s_goal=اهداف|s_tx=تراکنش‌ها|warn=هشدار بودجه (درصد)|export=خروجی JSON|csv=خروجی CSV|import=ورودی JSON|print=چاپ گزارش|demo=افزودن داده نمونه|clear=پاک‌کردن تراکنش‌ها|reset=بازنشانی تنظیمات|p_mint=نعناع|p_paper=کاغذ|p_night=شب‌پرواز|p_neon=نئون|p_ocean=اقیانوس|p_rose=رز|t_saved=ذخیره شد|t_del=حذف شد|t_undo=بازگردانی|t_imp=با موفقیت وارد شد|t_bad=فایل یا متن نامعتبر است|t_rst=تنظیمات بازنشانی شد|t_demo=داده نمونه اضافه شد|t_clr=تراکنش‌ها پاک شد|t_need=مبلغ معتبر وارد کنید|t_sure=برای تأیید دوباره بزنید|t_warn=به سقف بودجه این دسته نزدیک شدی|t_over=از بودجه این دسته گذشتی|t_copy=کپی شد|copy=کپی|dl=دانلود|apply=اعمال|pick=انتخاب فایل|paste=متن JSON را اینجا بچسبانید|g1t=این برنامه چیست؟|g1d=ثبت درآمد و هزینه، بودجه‌بندی، هدف پس‌انداز، نمودار و تحلیل ماهانه، همه بدون نیاز به حساب کاربری.|g2t=ثبت تراکنش|g2d=دکمه + یا کلید N. نوع، مبلغ، دسته، تاریخ، توضیح و برچسب را وارد کن. ارقام فارسی و جداکننده هزار هم پذیرفته می‌شوند.|g3t=ماه و تقویم|g3d=با فلش‌های بالا ماه را عوض کن یا کل زمان را ببین. تقویم شمسی یا میلادی از تنظیمات قابل تغییر است.|g4t=بودجه و هشدار|g4d=برای هر دسته سقف ماهانه بگذار؛ نزدیک شدن به آستانه هشدار نارنجی و عبور از آن قرمز می‌شود.|g5t=اهداف پس‌انداز|g5d=هدف تعریف کن و هر وقت پول کنار گذاشتی واریز بزن تا درصد پیشرفت را ببینی.|g6t=ظاهر و جلوه‌ها|g6d=۵ تم، رنگ دلخواه، ۶ سبک آماده، ۶ پس‌زمینه، ۴ فونت، انیمیشن ورود، کارت سه‌بعدی و درخشش ماوس.|g7t=پشتیبان‌گیری|g7d=در بخش داده‌ها خروجی JSON یا CSV بگیر، متن را کپی کن و بعداً با ورودی JSON برگردان.|g8t=میان‌برها|g8d=N تراکنش جدید، / جستجو، «,» تنظیمات، Esc بستن.|k1=تراکنش جدید|k2=جستجو|k3=تنظیمات|k4=بستن"),
-en:P("app=SpendWise|sub=Smart income & expense manager|foot=SpendWise · your data stays on this device|bal=Period balance|inc=Income|exp=Expenses|sav=Savings rate|add=New transaction|edit=Edit transaction|del=Delete|save=Save|cancel=Cancel|amt=Amount|cat=Category|date=Date|note=Note|tag=Tag|all=All|search=Search transactions…|s_new=Newest|s_old=Oldest|s_big=Largest|empty=No transactions yet|ins=Smart insights|avgd=Average daily spend|topc=Top category|proj=Projected month-end spend|bigx=Largest expense|bud=Budgets|goals=Savings goals|limit=Monthly limit|spent=Spent|left=Left|over=Over limit|gname=Goal name|gtarget=Target amount|dep=Deposit|tx=Transactions|byc=Category share|trend=Last 6 months|full=All time|nobud=No budgets set|nogoal=No goals yet|nodata=Nothing to show|none=None|food=Food|home=Housing|car=Transport|shop=Shopping|health=Health|fun=Fun|edu=Education|bill=Bills|travel=Travel|gift=Gifts|salary=Salary|freelance=Freelance|invest=Investments|other=Other|settings=Settings|ssearch=Search settings…|guide=Guide|g_back=Back to settings|t_look=Look|t_bg=Backdrop|t_ui=Interface|t_units=Units|t_content=Content|t_data=Data|presets=Style presets|theme=Theme|light=Light|dark=Dark|auto=Auto|sepia=Sepia|midnight=Midnight|accent=Accent color|card=Card style|glass=Glass|solid=Solid|outline=Outline|r=Corner radius|fs=Text size|font=Font|bg=Background pattern|plain=Plain|dots=Dots|grid=Grid|lines=Lines|aurora=Aurora|stars=Stars|bgi=Background intensity|anim=Animations|rev=Reveal on scroll|prog=Scroll progress bar|tilt=3D cards|dense=Compact mode|hc=High contrast|cnt=Animated number count|glow=Cursor glow|lang=Language|cur=Currency|toman=Toman|rial=Rial|usd=USD|eur=EUR|dg=Digits|dg_auto=Default|dg_latn=Latin|dg_arab=Arabic|cal=Calendar|jal=Jalali|greg=Gregorian|per=Default view|per_m=Monthly|per_a=All time|sections=Sections & order|s_sum=Summary|s_chart=Charts|s_bud=Budgets|s_goal=Goals|s_tx=Transactions|warn=Budget warning (%)|export=Export JSON|csv=Export CSV|import=Import JSON|print=Print report|demo=Add sample data|clear=Clear transactions|reset=Reset settings|p_mint=Mint|p_paper=Paper|p_night=Nightfall|p_neon=Neon|p_ocean=Ocean|p_rose=Rose|t_saved=Saved|t_del=Deleted|t_undo=Undo|t_imp=Imported successfully|t_bad=Invalid file or text|t_rst=Settings reset|t_demo=Sample data added|t_clr=Transactions cleared|t_need=Enter a valid amount|t_sure=Press again to confirm|t_warn=You're close to this category's budget|t_over=You went over this category's budget|t_copy=Copied|copy=Copy|dl=Download|apply=Apply|pick=Choose file|paste=Paste JSON here|g1t=What is this?|g1d=Track income and expenses, set budgets and savings goals, and read charts and monthly insights, no account needed.|g2t=Adding transactions|g2d=Use the + button or press N. Enter type, amount, category, date, note and tag. Persian digits and thousands separators work too.|g3t=Months & calendar|g3d=Switch months with the header arrows or view all time. Choose Jalali or Gregorian in settings.|g4t=Budgets & alerts|g4d=Set a monthly cap per category; nearing the threshold turns the bar amber, passing it turns red.|g5t=Savings goals|g5d=Create a goal and deposit whenever you set money aside to see your progress.|g6t=Look & effects|g6d=5 themes, custom accent, 6 presets, 6 backdrops, 4 fonts, entrance animations, 3D cards and cursor glow.|g7t=Backups|g7d=Export JSON or CSV in Data, copy the text, and restore it later with Import JSON.|g8t=Shortcuts|g8d=N new transaction, / search, comma for settings, Esc to close.|k1=New transaction|k2=Search|k3=Settings|k4=Close")};
-const T=k=>(L[S.lang]&&L[S.lang][k])??L.en[k]??k;
-const K='spendwise-v1',C=[['food','food',25,'e'],['home','home',210,'e'],['car','car',265,'e'],['shop','bag',320,'e'],['health','heart',350,'e'],['fun','film',285,'e'],['edu','book',190,'e'],['bill','bolt',45,'e'],['travel','plane',170,'e'],['gift','gift',10,'b'],['salary','wallet',150,'i'],['freelance','spark',200,'i'],['invest','chart',120,'i'],['other','tag',230,'b']];
-const cm=Object.fromEntries(C.map(c=>[c[0],c])),catsFor=t=>C.filter(c=>c[3]==t||c[3]=='b');
-const FN=['Vazirmatn','Noto Kufi Arabic','Noto Naskh Arabic','system-ui'];
-const PR={mint:{theme:'light',h:165,s:62,l:40,bg:'dots',card:'glass'},paper:{theme:'sepia',h:20,s:60,l:40,bg:'lines',card:'outline'},night:{theme:'midnight',h:190,s:90,l:55,bg:'stars',card:'glass'},neon:{theme:'dark',h:300,s:90,l:62,bg:'aurora',card:'glass'},ocean:{theme:'light',h:200,s:90,l:36,bg:'grid',card:'solid'},rose:{theme:'light',h:335,s:80,l:50,bg:'dots',card:'glass'}};
-const DEF={theme:'auto',h:165,s:62,l:40,lang:'fa',r:16,fs:1,font:0,bg:'dots',bgi:.6,card:'glass',anim:1,rev:1,prog:1,tilt:0,glow:0,dense:0,hc:0,cnt:1,cur:'toman',dg:'auto',cal:'auto',per:'m',warn:80,vis:{sum:1,chart:1,bud:1,goal:1,tx:1},ord:['sum','chart','bud','goal','tx'],tx:[],bud:{},goals:[]};
-let S;try{S={...DEF,...JSON.parse(localStorage.getItem(K)||'{}')}}catch(e){S={...DEF}}
-function norm(){S.vis={...DEF.vis,...(S.vis||{})};S.ord=[...(S.ord||[]).filter(k=>DEF.ord.includes(k)),...DEF.ord.filter(k=>!(S.ord||[]).includes(k))];['tx','goals'].forEach(k=>{if(!Array.isArray(S[k]))S[k]=[]});if(!S.bud||typeof S.bud!='object')S.bud={}}norm();
-const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-const isJ=()=>S.cal=='auto'?S.lang=='fa':S.cal=='j';
-const loc=()=>(S.lang=='fa'?'fa-IR':'en-US')+'-u-ca-'+(isJ()?'persian':'gregory')+(S.dg=='latn'?'-nu-latn':S.dg=='arab'?'-nu-arab':'');
-const num=n=>new Intl.NumberFormat(loc(),{maximumFractionDigits:(S.cur=='usd'||S.cur=='eur')?2:0}).format(n);
-const money=n=>num(n)+' '+T(S.cur);
-const toEn=s=>String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/[٬,،\s]/g,'');
-const pn=s=>{const v=parseFloat(toEn(s));return isFinite(v)?v:NaN};
-const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
-const dt=s=>new Date(s+'T12:00:00');
-const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
-const mk=d=>{const p=new Intl.DateTimeFormat('en-u-ca-'+(isJ()?'persian':'gregory')+'-nu-latn',{year:'numeric',month:'numeric'}).formatToParts(d);return p.find(x=>x.type=='year').value+'-'+p.find(x=>x.type=='month').value};
-const fd=s=>new Intl.DateTimeFormat(loc(),{day:'numeric',month:'short'}).format(dt(s));
-let anc=new Date(),all=S.per=='a',F={t:'all',q:'',c:'',s:'new'},ed=null,fm={t:'e',c:'food'},first=true,tab='look',gview=false,armed=null;
-function shift(n){let d=new Date(anc),k=mk(d);while(mk(d)==k)d=addD(d,n);anc=d;if(n<0){}render()}
-function span(){let d=new Date(anc),k=mk(d);while(mk(addD(d,-1))==k)d=addD(d,-1);let n=0,e=0,now=new Date();while(mk(d)==k){n++;if(d<=now)e++;d=addD(d,1)}return{n,e}}
-function apply(){const R=document.documentElement,t=S.theme=='auto'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):S.theme;
-R.dataset.t=t;R.lang=S.lang;R.dir=S.lang=='fa'?'rtl':'ltr';R.dataset.card=S.card;
-[['anim'],['rev'],['prog'],['tilt'],['glow'],['dense'],['hc']].forEach(([k])=>R.dataset[k]=S[k]?'on':'off');
-const st=R.style;st.setProperty('--ac',`hsl(${S.h} ${S.s}% ${S.l}%)`);st.setProperty('--ac2',`hsl(${(S.h+40)%360} ${S.s}% ${Math.min(S.l+12,68)}%)`);st.setProperty('--r',S.r+'px');st.setProperty('--fs',S.fs);st.setProperty('--bgi',S.bgi);
-st.setProperty('--f',`'${FN[S.font]||FN[0]}','Vazirmatn',system-ui,sans-serif`);$('#bg').className='bg-'+S.bg}
-matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{apply()});
-function toast(m,fn){const e=document.createElement('div');e.className='tt';e.innerHTML=`<span>${esc(m)}</span>`;if(fn){const b=document.createElement('button');b.textContent=T('t_undo');b.onclick=()=>{fn();e.remove()};e.append(b)}$('#ts').append(e);setTimeout(()=>e.remove(),fn?5000:2600)}
-const arm=k=>{if(armed==k)return true;armed=k;toast(T('t_sure'));setTimeout(()=>{if(armed==k)armed=null},3000);return false};
-function stat(P){const sum=t=>P.filter(x=>x.t==t).reduce((a,x)=>a+x.a,0),I=sum('i'),E=sum('e');return{I,E,B:I-E}}
-const cbub=(c,s='')=>{const x=cm[c]||cm.other;return `<span class="cb" style="--h:${x[2]};${s}">${ic(x[1])}</span>`};
-function render(){
- const k=mk(anc),P=S.tx.filter(x=>all||mk(dt(x.d))==k),{I,E,B}=stat(P),Ex=P.filter(x=>x.t=='e');
- $('#mt').textContent=all?T('full'):new Intl.DateTimeFormat(loc(),{month:'long',year:'numeric'}).format(anc);
- $('#ba').classList.toggle('on',all);$('#b1').disabled=$('#b2').disabled=all;
- const byC={};Ex.forEach(x=>byC[x.c]=(byC[x.c]||0)+x.a);const cats=Object.entries(byC).sort((a,b)=>b[1]-a[1]);
- const H={
- sum:()=>{const sp=span(),cur=!all&&sp.e<sp.n,top=cats[0],big=Ex.slice().sort((a,b)=>b.a-a.a)[0],ins=[];
-  ins.push(['clock'in IC?'':'calendar',T('avgd'),Ex.length&&!all?money(E/Math.max(sp.e,1)):'—','calendar']);
-  ins.push(['',T('topc'),top?T(top[0]):'—',top?cm[top[0]]?.[1]||'tag':'tag']);
-  ins.push(['',T('proj'),cur&&E?money(E/Math.max(sp.e,1)*sp.n):'—','target']);
-  ins.push(['',T('bigx'),big?esc(big.n||T(big.c))+' · '+money(big.a):'—','bolt']);
-  return `<div class="hero"><div class="bal">${ic('coin').replace('class="ic"','class="ic cn"')}${ic('coin').replace('class="ic"','class="ic cn"')}<small>${T('bal')}</small><b class="cu" data-k="B" data-v="${B}"></b></div>
-  <div class="kp"><div class="ki up"><span class="cb" style="--h:150">${ic('down')}</span><div><small>${T('inc')}</small><b class="cu" data-k="I" data-v="${I}"></b></div></div>
-  <div class="ki dn" style="animation-delay:.1s"><span class="cb" style="--h:350">${ic('up')}</span><div><small>${T('exp')}</small><b class="cu" data-k="E" data-v="${E}"></b></div></div>
-  <div class="ki" style="animation-delay:.2s"><span class="cb" style="--h:200">${ic('pie')}</span><div><small>${T('sav')}</small><b>${I>0?num(Math.round(B/I*100))+'٪'.replace('٪',S.lang=='fa'?'٪':'%'):'—'}</b></div></div></div></div>
-  <h2 style="margin-top:18px">${ic('spark')}${T('ins')}</h2><div class="ig" style="margin-top:0">${ins.map((x,i)=>`<div class="ki" style="animation-delay:${i*.08}s"><span class="cb" style="--h:${200+i*40}">${ic(x[3])}</span><div><small>${x[1]}</small><b>${x[2]}</b></div></div>`).join('')}</div>`},
- chart:()=>{const tot=E||1;let acc=0;const C0=251.33;
-  const dn=cats.length?`<svg viewBox="0 0 100 100" class="dn2" width="150" height="150" style="transform:rotate(-90deg)"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--ln)" stroke-width="12" style="animation:none"/>${cats.map(([c,v])=>{const l=v/tot*C0,s=`<circle cx="50" cy="50" r="40" fill="none" stroke="hsl(${cm[c]?.[2]??230} 70% 52%)" stroke-width="12" stroke-dasharray="${Math.max(l-1.5,.5)} ${C0}" stroke-dashoffset="${-acc}"/>`;acc+=l;return s}).join('')}</svg>`:`<div class="em" style="padding:10px">${ic('pie')}${T('nodata')}</div>`;
-  const ms=[];let d=new Date(anc);for(let i=0;i<6;i++){const kk=mk(d),m=S.tx.filter(x=>mk(dt(x.d))==kk),s=stat(m);ms.unshift({d:new Date(d),...s});while(mk(d)==kk)d=addD(d,-1)}
-  const mx=Math.max(1,...ms.map(m=>Math.max(m.I,m.E))),bw=26;
-  const bars=ms.map((m,i)=>{const x=i*54+8,h1=m.I/mx*80,h2=m.E/mx*80;return `<rect x="${x}" y="${90-h1}" width="${bw/2-1}" height="${h1}" rx="3" fill="hsl(150 65% 45%)" style="animation-delay:${i*80}ms"/><rect x="${x+bw/2}" y="${90-h2}" width="${bw/2-1}" height="${h2}" rx="3" fill="hsl(350 75% 55%)" style="animation-delay:${i*80+40}ms"/><text x="${x+bw/2}" y="102">${new Intl.DateTimeFormat(loc(),{month:'short'}).format(m.d)}</text>`}).join('');
-  return `<h2>${ic('pie')}${T('byc')}</h2><div class="chs">${dn}<div class="lgd">${cats.slice(0,6).map(([c,v])=>`<div><i style="--h:${cm[c]?.[2]??230}"></i><span>${T(c)}</span><span>${num(Math.round(v/tot*100))}${S.lang=='fa'?'٪':'%'}</span></div>`).join('')}</div></div>
-  <p class="sub">${ic('chart')} ${T('trend')}</p><svg class="brs" viewBox="0 0 330 108" width="100%">${bars}</svg>`},
- bud:()=>{const mm=S.tx.filter(x=>x.t=='e'&&mk(dt(x.d))==k),sp={};mm.forEach(x=>sp[x.c]=(sp[x.c]||0)+x.a);
-  const ids=[...new Set([...Object.keys(S.bud),...Object.keys(sp)])].filter(c=>cm[c]);
-  const rows=ids.map(c=>{const l=S.bud[c]||0,s=sp[c]||0,p=l?s/l*100:0,cl=p>=100?'ov':p>=S.warn?'wn':'';
-   return `<div class="br">${cbub(c)}<div class="bh"><b>${T(c)}</b><span>${money(s)}${l?' / '+money(l):''}</span></div><div><div class="bar ${cl}"><i style="--w:${Math.min(p,100)}%"></i></div><div class="bh" style="margin-top:6px;font-size:.72rem;color:var(--mu)"><span>${l?(s>l?T('over')+': '+money(s-l):T('left')+': '+money(l-s)):T('nobud')}</span><input class="in2" data-bc="${c}" inputmode="decimal" placeholder="${T('limit')}" value="${l?esc(num(l).replace(/[٬,]/g,'')):''}"></div></div></div>`}).join('');
-  return `<h2>${ic('bell')}${T('bud')}<em>${new Intl.DateTimeFormat(loc(),{month:'long'}).format(anc)}</em></h2>${rows||`<div class="em">${ic('bell')}${T('nobud')}</div>`}
-  <div class="add"><select id="bs">${C.filter(c=>c[3]!='i').map(c=>`<option value="${c[0]}">${T(c[0])}</option>`).join('')}</select><input id="bl" inputmode="decimal" placeholder="${T('limit')}"><button class="bt pb" data-a="badd">${ic('plus')}</button></div>`},
- goal:()=>`<h2>${ic('target')}${T('goals')}</h2><div class="gl">${S.goals.map((g,i)=>{const p=Math.min(100,g.s/g.t*100),C0=2*Math.PI*26;return `<div class="gc" style="animation-delay:${i*80}ms"><div class="gt"><b>${esc(g.n)}</b><button class="ib dg" style="width:30px;height:30px" data-a="gdel" data-id="${g.id}">${ic('x')}</button></div><div class="rg"><svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--ln)" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--ac)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C0*p/100} ${C0}" style="animation:gd 1.1s both"/></svg><div><b style="font-size:1.1rem">${num(Math.round(p))}${S.lang=='fa'?'٪':'%'}</b><small style="display:block;color:var(--mu)">${money(g.s)} / ${money(g.t)}</small></div></div><div style="display:flex;gap:6px"><input data-gi="${g.id}" inputmode="decimal" placeholder="${T('dep')}"><button class="bt pb sm" data-a="gdep" data-id="${g.id}">${ic('plus')}</button></div></div>`}).join('')||`<div class="em w">${ic('target')}${T('nogoal')}</div>`}</div>
-  <div class="add"><input id="gn" placeholder="${T('gname')}"><input id="gt" inputmode="decimal" placeholder="${T('gtarget')}"><button class="bt pb" data-a="gadd">${ic('plus')}</button></div>`,
- tx:()=>`<h2>${ic('list')}${T('tx')}<em id="tc"></em></h2><div class="tb"><input id="fq" placeholder="${T('search')}" value="${esc(F.q)}">${['all','i','e'].map(t=>`<button class="ch ${F.t==t?'on':''}" data-ft="${t}">${t=='all'?T('all'):t=='i'?T('inc'):T('exp')}</button>`).join('')}<select id="fc"><option value="">${T('cat')}</option>${C.map(c=>`<option value="${c[0]}" ${F.c==c[0]?'selected':''}>${T(c[0])}</option>`).join('')}</select><select id="fs">${[['new','s_new'],['old','s_old'],['big','s_big']].map(([v,l])=>`<option value="${v}" ${F.s==v?'selected':''}>${T(l)}</option>`).join('')}</select></div><div id="tl"></div>`};
- $('#main').innerHTML=S.ord.filter(x=>S.vis[x]).map((x,i)=>`<section class="cd rv ${x=='sum'||x=='tx'?'w':''}" style="--i:${i}">${H[x]()}</section>`).join('');
- post()}
-const pv={};
-function post(){txList();
- $$('.rv').forEach(e=>{if(!first||!S.rev||!S.anim)e.classList.add('in');else io.observe(e)});first=false;
- $$('.cu').forEach(e=>{const v=+e.dataset.v,k=e.dataset.k,f=pv[k]??0;pv[k]=v;if(!S.cnt||!S.anim||f===v){e.textContent=money(v);return}
-  const t0=performance.now(),step=t=>{const p=Math.min(1,(t-t0)/800),q=1-Math.pow(1-p,3);e.textContent=money(f+(v-f)*q);if(p<1&&e.isConnected)requestAnimationFrame(step)};requestAnimationFrame(step)})}
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.06});
-function txList(){const el=$('#tl');if(!el)return;const k=mk(anc),q=F.q.trim().toLowerCase();
- let L2=S.tx.filter(x=>(all||mk(dt(x.d))==k)&&(F.t=='all'||x.t==F.t)&&(!F.c||x.c==F.c)&&(!q||((x.n||'')+' '+(x.g||'')+' '+T(x.c)).toLowerCase().includes(q)));
- L2.sort((a,b)=>F.s=='big'?b.a-a.a:F.s=='old'?a.d.localeCompare(b.d):b.d.localeCompare(a.d)||0);
- $('#tc').textContent=num(L2.length);
- el.innerHTML=L2.length?L2.map((x,i)=>`<div class="tr" style="--k:${Math.min(i,20)}">${cbub(x.c)}<div class="mid"><b>${esc(x.n||T(x.c))}${x.g?`<span class="tag">${esc(x.g)}</span>`:''}</b><small>${T(x.c)} · ${fd(x.d)}</small></div><span class="am ${x.t}">${x.t=='i'?'+':'−'}${money(x.a)}</span><div class="ac"><button class="st ${x.f?'on':''}" data-a="star" data-id="${x.id}">${ic('star')}</button><button data-a="edit" data-id="${x.id}">${ic('edit')}</button><button class="dl" data-a="del" data-id="${x.id}">${ic('trash')}</button></div></div>`).join(''):`<div class="em">${ic('inbox')}${T('empty')}</div>`}
-const style=document.createElement('style');style.textContent='@keyframes gd{from{stroke-dasharray:0 200}}';document.head.append(style);
-function modal(h){$('#md').innerHTML=`<div class="mb">${h}</div>`;$('#md').classList.add('on')}
-function closeM(){$('#md').classList.remove('on')}
-$('#md').addEventListener('mousedown',e=>{if(e.target.id=='md')closeM()});
-function openTx(id){ed=id||null;const x=id&&S.tx.find(v=>v.id==id);fm=x?{t:x.t,c:x.c}:{t:'e',c:'food'};
- modal(`<h3>${ic('plus')}${T(x?'edit':'add')}</h3><div class="sg" id="ftt"></div><label>${T('amt')}<input id="fa" inputmode="decimal" value="${x?esc(String(x.a)):''}" autocomplete="off"></label><div class="cg" id="fcg"></div><div class="r2"><label>${T('date')}<input type="date" id="fdt" value="${x?x.d:iso(all?new Date():anc)}"></label><label>${T('tag')}<input id="ftg" value="${x?esc(x.g||''):''}"></label></div><label>${T('note')}<input id="fnn" value="${x?esc(x.n||''):''}"></label><div class="ra"><button class="bt" data-a="cx">${T('cancel')}</button><button class="bt pb" data-a="sv">${ic('check')}${T('save')}</button></div>`);fmr();setTimeout(()=>$('#fa').focus(),50)}
-function fmr(){$('#ftt').innerHTML=['e','i'].map(t=>`<button class="${fm.t==t?'on':''}" data-tt="${t}">${T(t=='e'?'exp':'inc')}</button>`).join('');const cs=catsFor(fm.t);if(!cs.some(c=>c[0]==fm.c))fm.c=cs[0][0];$('#fcg').innerHTML=cs.map(c=>`<button class="${fm.c==c[0]?'on':''}" data-cc="${c[0]}" style="--h:${c[2]}">${cbub(c[0])}<span>${T(c[0])}</span></button>`).join('')}
-function saveTx(){const a=pn($('#fa').value);if(!(a>0)){$('#fa').classList.add('sk');setTimeout(()=>$('#fa').classList.remove('sk'),400);return toast(T('t_need'))}
- const d=$('#fdt').value||iso(new Date()),o={id:ed||uid(),t:fm.t,a,c:fm.c,d,n:$('#fnn').value.trim(),g:$('#ftg').value.trim()};
- if(ed){const i=S.tx.findIndex(v=>v.id==ed);o.f=S.tx[i]?.f;S.tx[i]=o}else S.tx.unshift(o);save();closeM();render();toast(T('t_saved'));
- if(o.t=='e'&&S.bud[o.c]){const s=S.tx.filter(x=>x.t=='e'&&x.c==o.c&&mk(dt(x.d))==mk(dt(o.d))).reduce((p,x)=>p+x.a,0),r=s/S.bud[o.c]*100;if(r>=100)toast(T('t_over'));else if(r>=S.warn)toast(T('t_warn'))}}
-const cp=t=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove()};
-function csvText(){return '\ufeff'+'date,type,category,amount,note,tag\n'+S.tx.map(x=>[x.d,x.t=='i'?'income':'expense',x.c,x.a,x.n||'',x.g||''].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n')}
-function openIO(m){const txt=m=='exp'?JSON.stringify({v:1,tx:S.tx,bud:S.bud,goals:S.goals,settings:Object.fromEntries(Object.entries(S).filter(([k])=>!['tx','bud','goals'].includes(k)))},null,1):m=='csv'?csvText():'';
- modal(`<h3>${ic(m=='imp'?'upload':'download')}${T(m=='exp'?'export':m=='csv'?'csv':'import')}</h3><textarea id="iot" ${m=='imp'?'':'readonly'} placeholder="${T('paste')}"></textarea><div class="ra">${m=='imp'?`<button class="bt" data-a="pick">${ic('upload')}${T('pick')}</button><button class="bt pb" data-a="doimp">${ic('check')}${T('apply')}</button>`:`<button class="bt" data-a="dlf" data-m="${m}">${ic('download')}${T('dl')}</button><button class="bt pb" data-a="cpy">${ic('check')}${T('copy')}</button>`}<button class="bt" data-a="cx">${T('cancel')}</button></div>`);$('#iot').value=txt}
-function doImport(txt){try{const o=JSON.parse(txt),arr=Array.isArray(o)?o:o.tx;if(!Array.isArray(arr))throw 0;
- const tx=arr.filter(x=>x&&(x.t=='i'||x.t=='e')&&+x.a>0&&/^\d{4}-\d\d-\d\d$/.test(x.d)).map(x=>({id:String(x.id||uid()),t:x.t,a:+x.a,c:cm[x.c]?x.c:'other',d:x.d,n:String(x.n||'').slice(0,120),g:String(x.g||'').slice(0,30),f:x.f?1:0}));
- S.tx=tx;if(o.bud&&typeof o.bud=='object'&&!Array.isArray(o.bud))S.bud=Object.fromEntries(Object.entries(o.bud).filter(([c,v])=>cm[c]&&+v>0).map(([c,v])=>[c,+v]));
- if(Array.isArray(o.goals))S.goals=o.goals.filter(g=>g&&+g.t>0).map(g=>({id:String(g.id||uid()),n:String(g.n||'').slice(0,60),t:+g.t,s:Math.max(0,+g.s||0)}));
- if(o.settings)Object.keys(DEF).forEach(k=>{if(!['tx','bud','goals'].includes(k)&&k in o.settings)S[k]=o.settings[k]});
- norm();save();apply();build();txt2();render();closeM();toast(T('t_imp'))}catch(e){toast(T('t_bad'))}}
-function demo(){let s=7;const r=()=>(s=s*16807%2147483647)/2147483647,now=new Date(),add=[];
- const E=[['food',90,500],['car',40,300],['shop',100,900],['bill',200,700],['fun',80,400],['health',60,350],['edu',100,400],['travel',300,900],['gift',50,300],['home',1500,3000]];
- for(let i=0;i<110;i++){const d=iso(addD(now,-Math.floor(r()*95)));if(r()<.14)add.push({id:uid(),t:'i',a:Math.round((r()*6000+4000)),c:['salary','freelance','invest'][Math.floor(r()*3)],d,n:'',g:'',f:0});else{const e=E[Math.floor(r()*E.length)];add.push({id:uid(),t:'e',a:Math.round((e[1]+r()*(e[2]-e[1]))*10),c:e[0],d,n:'',g:r()<.1?'#':'',f:0})}}
- add.forEach(x=>{if(x.t=='i')x.a*=1000;else x.a*=100;if(x.g=='#')x.g=''});S.tx=[...add,...S.tx];if(!Object.keys(S.bud).length)S.bud={food:9e5,fun:4e5,shop:12e5};if(!S.goals.length)S.goals=[{id:uid(),n:S.lang=='fa'?'سفر تابستان':'Summer trip',t:3e7,s:9e6}];save();render();toast(T('t_demo'))}
-const TABS=[['look','palette'],['bg','layers'],['ui','sliders'],['units','globe'],['content','list'],['data','download']];
-const o=(...a)=>a.map(x=>[x,x]);
-const DF={look:[['sun','theme','s',o('light','dark','auto','sepia','midnight')],['palette','accent','a'],['spark','presets','p'],['layers','card','s',o('glass','solid','outline')],['corner','r','r',0,30,2],['type','fs','r',.85,1.3,.05],['type','font','s',[[0,'Vazirmatn'],[1,'Noto Kufi Arabic'],[2,'Noto Naskh Arabic'],[3,'system-ui']]]],
-bg:[['layers','bg','s',[['none','plain'],...o('dots','grid','lines','aurora','stars')]],['sun','bgi','r',.1,1,.05]],
-ui:[['spark','anim','w'],['up','rev','w'],['chart','prog','w'],['layers','tilt','w'],['sun','glow','w'],['list','dense','w'],['eye','hc','w'],['coin','cnt','w'],['globe','lang','s',[['fa','فارسی'],['en','English']]]],
-units:[['coin','cur','s',o('toman','rial','usd','eur')],['type','dg','s',[['auto','dg_auto'],['latn','dg_latn'],['arab','dg_arab']]],['calendar','cal','s',[['auto','auto'],['j','jal'],['g','greg']]],['calendar','per','s',[['m','per_m'],['a','per_a']]]],
-content:[['list','sections','o'],['bell','warn','r',50,100,5]],data:[]};
-function build(){const keepScroll=$('#pan').scrollTop;
- const gen=(it)=>{const[i,k,t,a,b,c]=it,h=`<p>${ic(i)}${T(k)}<span class="vl" id="v-${k}"></span></p>`;
-  if(t=='s')return `<div class="gp">${h}<div class="sg">${a.map(([v,l])=>`<button data-k="${k}" data-v="${v}">${T(l)}</button>`).join('')}</div></div>`;
-  if(t=='r')return `<div class="gp">${h}<input type="range" data-k="${k}" min="${a}" max="${b}" step="${c}"></div>`;
-  if(t=='w')return `<div class="gp swr"><p>${ic(i)}${T(k)}</p><button class="sw" data-sw="${k}" role="switch"></button></div>`;
-  if(t=='a')return `<div class="gp">${h}<input type="range" data-k="h" min="0" max="360"><input type="range" data-k="s" min="30" max="100"><input type="range" data-k="l" min="28" max="70"></div>`;
-  if(t=='p')return `<div class="gp">${h}<div class="pre">${Object.entries(PR).map(([n,v])=>`<button data-pr="${n}" style="background:linear-gradient(135deg,hsl(${v.h} ${v.s}% ${v.l}%),hsl(${(v.h+40)%360} ${v.s}% ${Math.min(v.l+12,68)}%))">${T('p_'+n)}</button>`).join('')}</div></div>`;
-  if(t=='o')return `<div class="gp">${h}<div class="ol" id="ol"></div></div>`};
- const dataP=`<div class="dtb">${[['download','export','exp'],['download','csv','csvx'],['upload','import','imp'],['print','print','prt'],['spark','demo','demo'],['trash','clear','clr'],['reset','reset','rst']].map(([i,l,a])=>`<button class="bt ${a=='clr'||a=='rst'?'dg':''}" data-a="${a}">${ic(i)}${T(l)}</button>`).join('')}</div><div class="gp"><p>${ic('kbd')}${T('g8t')}</p><div class="ks">${[['k1','N'],['k2','/'],['k3',','],['k4','Esc']].map(([k,v])=>`<div><span>${T(k)}</span><kbd>${v}</kbd></div>`).join('')}</div></div>`;
- $('#pan').innerHTML=`<h3><span>${ic('sliders')}${T('settings')}<button class="ib" style="width:30px;height:30px" data-a="guide">${ic('info')}</button></span><button class="ib" style="width:34px;height:34px" data-a="gear">${ic('x')}</button></h3>
- <input id="sq" placeholder="${T('ssearch')}"><div id="sbody"><div class="tabs">${TABS.map(([k,i])=>`<button data-tab="${k}">${ic(i)}<span>${T('t_'+k)}</span></button>`).join('')}</div>${TABS.map(([k])=>`<div class="pane" data-pane="${k}">${k=='data'?dataP:DF[k].map(gen).join('')}</div>`).join('')}</div>
- <div id="gv" style="display:none"><button class="bt" data-a="guide">${ic('chevl')}${T('g_back')}</button>${[1,2,3,4,5,6,7,8].map(n=>`<div class="gi" style="--i:${n}"><span class="cb" style="--h:${n*40}">${ic(['info','plus','calendar','bell','target','palette','download','kbd'][n-1])}</span><div><b>${T('g'+n+'t')}</b><p>${T('g'+n+'d')}</p></div></div>`).join('')}</div>`;
- olist();mark();$('#pan').scrollTop=keepScroll}
-function olist(){const e=$('#ol');if(!e)return;e.innerHTML=S.ord.map((k,i)=>`<div><b>${T('s_'+k)}</b><button class="m" data-mv="${i}:-1" ${i?'':'disabled'}>${ic('up')}</button><button class="m" data-mv="${i}:1" ${i<S.ord.length-1?'':'disabled'}>${ic('down')}</button><button class="sw ${S.vis[k]?'on':''}" data-vk="${k}" role="switch"></button></div>`).join('')}
-function mark(){$$('#pan [data-k][data-v]').forEach(b=>b.classList.toggle('on',String(S[b.dataset.k])==b.dataset.v));
- $$('#pan input[type=range]').forEach(r=>{r.value=S[r.dataset.k];const v=$('#v-'+r.dataset.k);if(v){const k=r.dataset.k;v.textContent=k=='r'?num(S.r)+'px':k=='fs'||k=='bgi'?num(Math.round(S[k]*100))+'%':k=='warn'?num(S.warn)+'%':''}});
- $$('#pan [data-sw]').forEach(b=>b.classList.toggle('on',!!S[b.dataset.sw]));$$('#pan [data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab==tab));$$('#pan [data-pane]').forEach(p=>p.classList.toggle('on',p.dataset.pane==tab))}
-function txt2(){$$('[data-i]').forEach(e=>e.textContent=T(e.dataset.i));document.title=T('app');$('#lgi').innerHTML=ic('wallet');$('#b1').innerHTML=ic(S.lang=='fa'?'chevr':'chevl');$('#b2').innerHTML=ic(S.lang=='fa'?'chevl':'chevr');$('#ba').innerHTML=ic('calendar');$('#gear').innerHTML=ic('sliders');$('#fab').innerHTML=ic('plus')}
-function setK(k,v){S[k]=v;if(k=='per'){all=v=='a'}save();apply();mark();if(k=='lang'){build();txt2()}if(['theme','bg','card','font','r','fs','bgi','h','s','l','tilt','glow','prog','hc','anim','rev','dense'].includes(k)&&k!='dense'&&!['lang'].includes(k)){if(['theme','card','tilt','glow','prog','hc','anim','rev','bg','font','r','fs','bgi','h','s','l'].includes(k))return}render()}
-document.addEventListener('click',e=>{const t=e.target,b=t.closest('[data-a],[data-k][data-v],[data-sw],[data-vk],[data-mv],[data-pr],[data-tab],[data-ft],[data-tt],[data-cc]');if(!b)return;const D=b.dataset;
- if(D.k&&D.v!==undefined){const n=['font'].includes(D.k)?+D.v:D.v;return setK(D.k,n)}
- if(D.sw)return setK(D.sw,S[D.sw]?0:1);
- if(D.vk){S.vis[D.vk]=!S.vis[D.vk];save();olist();return render()}
- if(D.mv){const[i,n]=D.mv.split(':').map(Number),j=i+n;if(j<0||j>=S.ord.length)return;[S.ord[i],S.ord[j]]=[S.ord[j],S.ord[i]];save();olist();return render()}
- if(D.pr){Object.assign(S,PR[D.pr]);save();apply();mark();return render()}
- if(D.tab){tab=D.tab;return mark()}
- if(D.ft){F.t=D.ft;$$('.ch').forEach(c=>c.classList.toggle('on',c.dataset.ft==F.t));return txList()}
- if(D.tt){fm.t=D.tt;return fmr()}
- if(D.cc){fm.c=D.cc;return fmr()}
- const a=D.a,id=D.id;
- const A={mp:()=>shift(-1),mn:()=>shift(1),ma:()=>{all=!all;render()},new:()=>openTx(),edit:()=>openTx(id),cx:closeM,sv:saveTx,
-  gear:()=>{$('#pan').classList.toggle('on');},guide:()=>{gview=!gview;$('#gv').style.display=gview?'block':'none';$('#sbody').style.display=gview?'none':'block';$('#sq').style.display=gview?'none':'block'},
-  star:()=>{const x=S.tx.find(v=>v.id==id);if(x){x.f=x.f?0:1;save();txList()}},
-  del:()=>{const i=S.tx.findIndex(v=>v.id==id);if(i<0)return;const x=S.tx[i];S.tx.splice(i,1);save();render();toast(T('t_del'),()=>{S.tx.splice(Math.min(i,S.tx.length),0,x);save();render()})},
-  badd:()=>{const v=pn($('#bl').value);if(!(v>0))return toast(T('t_need'));S.bud[$('#bs').value]=v;save();render()},
-  gadd:()=>{const n=$('#gn').value.trim(),v=pn($('#gt').value);if(!n||!(v>0))return toast(T('t_need'));S.goals.push({id:uid(),n,t:v,s:0});save();render()},
-  gdep:()=>{const g=S.goals.find(v=>v.id==id),i=$(`[data-gi="${id}"]`),v=pn(i.value);if(!g||!(v>0))return toast(T('t_need'));g.s+=v;save();render();toast(T('t_saved'))},
-  gdel:()=>{S.goals=S.goals.filter(v=>v.id!=id);save();render()},
-  exp:()=>openIO('exp'),csvx:()=>openIO('csv'),imp:()=>openIO('imp'),prt:()=>{try{window.print()}catch(e){}},demo,
-  clr:()=>{if(!arm('clr'))return;S.tx=[];save();render();toast(T('t_clr'))},
-  rst:()=>{if(!arm('rst'))return;const keep={tx:S.tx,bud:S.bud,goals:S.goals};S={...DEF,...keep};norm();save();apply();build();txt2();render();toast(T('t_rst'))},
-  cpy:()=>{$('#iot').select();cp($('#iot').value);toast(T('t_copy'))},
-  dlf:()=>{try{const csv=D.m=='csv',u=URL.createObjectURL(new Blob([$('#iot').value],{type:csv?'text/csv':'application/json'})),l=document.createElement('a');l.href=u;l.download=csv?'expenses.csv':'expenses.json';l.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}catch(x){cp($('#iot').value);toast(T('t_copy'))}},
-  pick:()=>$('#imp').click(),doimp:()=>doImport($('#iot').value)};
- A[a]&&A[a]()});
-$('#imp').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#iot').value=r.result};r.readAsText(f);e.target.value=''});
-document.addEventListener('input',e=>{const t=e.target;
- if(t.matches('#pan input[type=range]')){S[t.dataset.k]=parseFloat(t.value);save();apply();mark();if(t.dataset.k=='warn')render();return}
- if(t.id=='fq'){F.q=t.value;txList()}
- if(t.id=='sq'){const q=t.value.trim().toLowerCase();$('.tabs').style.display=q?'none':'grid';$$('.pane').forEach(p=>p.classList.toggle('on',!!q||p.dataset.pane==tab));$$('#pan .gp').forEach(g=>g.style.display=!q||g.textContent.toLowerCase().includes(q)?'':'none')}});
-document.addEventListener('change',e=>{const t=e.target;if(t.id=='fc'){F.c=t.value;txList()}if(t.id=='fs'){F.s=t.value;txList()}
- if(t.dataset.bc){const v=pn(t.value);if(v>0)S.bud[t.dataset.bc]=v;else if(t.value.trim()==='')delete S.bud[t.dataset.bc];save();render()}});
-document.addEventListener('keydown',e=>{const tg=e.target.tagName,typing=/INPUT|TEXTAREA|SELECT/.test(tg);
- if(e.key=='Escape'){closeM();$('#pan').classList.remove('on');return}
- if(e.key=='Enter'&&$('#md').classList.contains('on')&&e.target.closest('.mb')&&tg=='INPUT'&&$('#fa'))return saveTx();
- if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
- if(e.key=='n'||e.key=='N'){e.preventDefault();openTx()}else if(e.key=='/'){e.preventDefault();$('#fq')?.focus()}else if(e.key==','){$('#pan').classList.toggle('on')}});
-addEventListener('scroll',()=>{const h=document.documentElement;h.style.setProperty('--p',h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight))},{passive:true});
-addEventListener('mousemove',e=>{if(S.glow){const g=$('#gl');g.style.transform=`translate(${e.clientX}px,${e.clientY}px)`}
- if(S.tilt){const c=e.target.closest&&e.target.closest('.cd');$$('.cd').forEach(x=>{if(x!==c)x.style.transform=''});if(c&&c.classList.contains('in')){const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${(-py*4).toFixed(2)}deg) rotateY(${(px*4).toFixed(2)}deg)`}}});
-apply();build();txt2();render();
+const $ = s => document.querySelector(s),
+    $$ = s => [...document.querySelectorAll(s)];
+
+const IC = {
+    plus: 'M12 5v14M5 12h14',
+    x: 'M6 6l12 12M18 6L6 18',
+    sliders: 'M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4',
+    search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0-0-14zM20 20l-4-4',
+    trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',
+    edit: 'M4 20l4-1 11-11-3-3L5 16l-1 4z',
+    download: 'M12 4v11M7 11l5 5 5-5M5 20h14',
+    upload: 'M12 16V5M7 9l5-5 5 5M5 20h14',
+    reset: 'M4 12a8 8 0 1 0 3-6.2M4 4v4h4',
+    print: 'M7 9V4h10v5M7 17H5v-6h14v6h-2M7 14h10v6H7z',
+    info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v5M12 8v.01',
+    wallet: 'M3 7h15a3 3 0 0 1 3 3v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7zM3 7l12-3v3M17 14h.01',
+    up: 'M12 19V5M6 11l6-6 6 6',
+    down: 'M12 5v14M6 13l6 6 6-6',
+    chart: 'M4 20V4M4 20h16M8 15l4-4 3 3 5-6',
+    target: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0-8zM12 12h.01',
+    calendar: 'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4',
+    star: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z',
+    bell: 'M6 16v-5a6 6 0 1 1 12 0v5l2 2H4l2-2zM10 21h4',
+    sun: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0-0-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5',
+    palette: 'M12 3a9 9 0 1 0 0 18c1.3 0 1.9-1 1.5-1.9-.4-1.1.3-2.1 1.5-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10zM7.5 11h.01M10 7h.01M15 7.5h.01',
+    layers: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',
+    globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+    type: 'M5 6V4h14v2M12 4v16M9 20h6',
+    chevl: 'M15 5l-7 7 7 7',
+    chevr: 'M9 5l7 7-7 7',
+    check: 'M5 12.5l4.5 4.5L19 7',
+    food: 'M7 3v7a2 2 0 0 0 4 0V3M9 3v18M17 3c-2 2-3 5-3 8h3v10',
+    home: 'M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6',
+    car: 'M4 16h16v3H4zM6 16l1.6-5h8.8L18 16M7 19v1.5M17 19v1.5',
+    bag: 'M5 8h14l-1 12H6L5 8zM9 8a3 3 0 0 1 6 0',
+    heart: 'M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z',
+    film: 'M4 5h16v14H4zM8 5v14M16 5v14M4 9h4M4 15h4M16 9h4M16 15h4',
+    book: 'M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2V5zM8 7h8',
+    bolt: 'M13 3L5 14h6l-1 7 8-11h-6l1-7z',
+    plane: 'M3 13l18-8-6 15-3-6-9-1z',
+    gift: 'M4 9h16v4H4zM6 13v8h12v-8M12 9v12M12 9c-2 0-4-1-4-3s3-2 4 3c1-5 4-5 4-3s-2 3-4 3',
+    tag: 'M3 12V4h8l10 10-8 8L3 12zM7.5 8h.01',
+    spark: 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z',
+    list: 'M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01',
+    eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0-0-6z',
+    corner: 'M4 20V11a7 7 0 0 1 7-7h9',
+    kbd: 'M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10',
+    coin: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM14.5 9a3 3 0 0 0-5 1c0 3 5 1.5 5 4.5a3 3 0 0 1-5 1M12 6.5v1.5M12 16v1.5',
+    pie: 'M12 3v9h9a9 9 0 1 1-9-9zM15 3a9 9 0 0 1 6 6h-6V3z',
+    inbox: 'M3 13l3-8h12l3 8v6H3v-6zM3 13h5l1 3h6l1-3h5'
+};
+
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `<svg width="0" height="0" style="position:absolute">${Object.entries(IC)
+        .map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24"><path d="${v}"/></symbol>`)
+        .join('')}</svg>`
+);
+
+const ic = n => `<svg class="ic"><use href="#i-${n}"/></svg>`;
+
+const P = s =>
+    Object.fromEntries(
+        s.split('|').map(x => {
+            const i = x.indexOf('=');
+            return [x.slice(0, i), x.slice(i + 1)];
+        })
+    );
+
+const L = {
+    fa: P(
+        "app=خرج‌یار|sub=مدیریت هوشمند درآمد و هزینه|foot=خرج‌یار · داده‌ها فقط روی دستگاه شما ذخیره می‌شوند|bal=تراز این دوره|inc=درآمد|exp=هزینه|sav=نرخ پس‌انداز|add=تراکنش جدید|edit=ویرایش تراکنش|del=حذف|save=ذخیره|cancel=انصراف|amt=مبلغ|cat=دسته‌بندی|date=تاریخ|note=توضیح|tag=برچسب|all=همه|search=جستجو در تراکنش‌ها…|s_new=جدیدترین|s_old=قدیمی‌ترین|s_big=بیشترین مبلغ|empty=هنوز تراکنشی ثبت نشده|ins=تحلیل هوشمند|avgd=میانگین هزینه روزانه|topc=پرخرج‌ترین دسته|proj=پیش‌بینی هزینه پایان ماه|bigx=بزرگ‌ترین هزینه|bud=بودجه‌ها|goals=هدف‌های پس‌انداز|limit=سقف ماهانه|spent=خرج‌شده|left=باقی‌مانده|over=بیش از سقف|gname=نام هدف|gtarget=مبلغ هدف|dep=واریز|tx=تراکنش‌ها|byc=سهم دسته‌ها|trend=روند ۶ ماه اخیر|full=کل زمان|nobud=بودجه‌ای تعیین نشده|nogoal=هدفی تعریف نشده|nodata=داده‌ای برای نمایش نیست|none=بدون|food=خوراک|home=مسکن|car=حمل‌ونقل|shop=خرید|health=سلامت|fun=تفریح|edu=آموزش|bill=قبوض|travel=سفر|gift=هدیه|salary=حقوق|freelance=پروژه|invest=سرمایه‌گذاری|other=سایر|settings=تنظیمات|ssearch=جستجو در تنظیمات…|guide=راهنما|g_back=بازگشت به تنظیمات|t_look=ظاهر|t_bg=پس‌زمینه|t_ui=رابط|t_units=واحدها|t_content=محتوا|t_data=داده‌ها|presets=سبک‌های آماده|theme=تم|light=روشن|dark=تیره|auto=خودکار|sepia=سپیا|midnight=نیمه‌شب|accent=رنگ تأکیدی|card=سبک کارت|glass=شیشه‌ای|solid=توپر|outline=خطی|r=گردی گوشه‌ها|fs=اندازه متن|font=فونت|bg=الگوی پس‌زمینه|plain=ساده|dots=نقطه‌ای|grid=شبکه|lines=خطوط|aurora=شفق|stars=ستاره|bgi=شدت پس‌زمینه|anim=انیمیشن‌ها|rev=انیمیشن ورود هنگام اسکرول|prog=نوار پیشرفت اسکرول|tilt=کارت سه‌بعدی|dense=حالت فشرده|hc=کنتراست بالا|cnt=شمارش متحرک اعداد|glow=درخشش ماوس|lang=زبان|cur=واحد پول|toman=تومان|rial=ریال|usd=دلار|eur=یورو|dg=نوع ارقام|dg_auto=پیش‌فرض|dg_latn=لاتین|dg_arab=عربی|cal=تقویم|jal=شمسی|greg=میلادی|per=نمایش پیش‌فرض|per_m=ماهانه|per_a=کل زمان|sections=نمایش و ترتیب بخش‌ها|s_sum=خلاصه|s_chart=نمودارها|s_bud=بودجه|s_goal=اهداف|s_tx=تراکنش‌ها|warn=هشدار بودجه (درصد)|export=خروجی JSON|csv=خروجی CSV|import=ورودی JSON|print=چاپ گزارش|demo=افزودن داده نمونه|clear=پاک‌کردن تراکنش‌ها|reset=بازنشانی تنظیمات|p_mint=نعناع|p_paper=کاغذ|p_night=شب‌پرواز|p_neon=نئون|p_ocean=اقیانوس|p_rose=رز|t_saved=ذخیره شد|t_del=حذف شد|t_undo=بازگردانی|t_imp=با موفقیت وارد شد|t_bad=فایل یا متن نامعتبر است|t_rst=تنظیمات بازنشانی شد|t_demo=داده نمونه اضافه شد|t_clr=تراکنش‌ها پاک شد|t_need=مبلغ معتبر وارد کنید|t_sure=برای تأیید دوباره بزنید|t_warn=به سقف بودجه این دسته نزدیک شدی|t_over=از بودجه این دسته گذشتی|t_copy=کپی شد|copy=کپی|dl=دانلود|apply=اعمال|pick=انتخاب فایل|paste=متن JSON را اینجا بچسبانید|g1t=این برنامه چیست؟|g1d=ثبت درآمد و هزینه، بودجه‌بندی، هدف پس‌انداز، نمودار و تحلیل ماهانه، همه بدون نیاز به حساب کاربری.|g2t=ثبت تراکنش|g2d=دکمه + یا کلید N. نوع، مبلغ، دسته، تاریخ، توضیح و برچسب را وارد کن. ارقام فارسی و جداکننده هزار هم پذیرفته می‌شوند.|g3t=ماه و تقویم|g3d=با فلش‌های بالا ماه را عوض کن یا کل زمان را ببین. تقویم شمسی یا میلادی از تنظیمات قابل تغییر است.|g4t=بودجه و هشدار|g4d=برای هر دسته سقف ماهانه بگذار؛ نزدیک شدن به آستانه هشدار نارنجی و عبور از آن قرمز می‌شود.|g5t=اهداف پس‌انداز|g5d=هدف تعریف کن و هر وقت پول کنار گذاشتی واریز بزن تا درصد پیشرفت را ببینی.|g6t=ظاهر و جلوه‌ها|g6d=۵ تم، رنگ دلخواه، ۶ سبک آماده، ۶ پس‌زمینه، ۴ فونت، انیمیشن ورود، کارت سه‌بعدی و درخشش ماوس.|g7t=پشتیبان‌گیری|g7d=در بخش داده‌ها خروجی JSON یا CSV بگیر، متن را کپی کن و بعداً با ورودی JSON برگردان.|g8t=میان‌برها|g8d=N تراکنش جدید، / جستجو، «,» تنظیمات، Esc بستن.|k1=تراکنش جدید|k2=جستجو|k3=تنظیمات|k4=بستن"
+    ),
+    en: P(
+        "app=SpendWise|sub=Smart income & expense manager|foot=SpendWise · your data stays on this device|bal=Period balance|inc=Income|exp=Expenses|sav=Savings rate|add=New transaction|edit=Edit transaction|del=Delete|save=Save|cancel=Cancel|amt=Amount|cat=Category|date=Date|note=Note|tag=Tag|all=All|search=Search transactions…|s_new=Newest|s_old=Oldest|s_big=Largest|empty=No transactions yet|ins=Smart insights|avgd=Average daily spend|topc=Top category|proj=Projected month-end spend|bigx=Largest expense|bud=Budgets|goals=Savings goals|limit=Monthly limit|spent=Spent|left=Left|over=Over limit|gname=Goal name|gtarget=Target amount|dep=Deposit|tx=Transactions|byc=Category share|trend=Last 6 months|full=All time|nobud=No budgets set|nogoal=No goals yet|nodata=Nothing to show|none=None|food=Food|home=Housing|car=Transport|shop=Shopping|health=Health|fun=Fun|edu=Education|bill=Bills|travel=Travel|gift=Gifts|salary=Salary|freelance=Freelance|invest=Investments|other=Other|settings=Settings|ssearch=Search settings…|guide=Guide|g_back=Back to settings|t_look=Look|t_bg=Backdrop|t_ui=Interface|t_units=Units|t_content=Content|t_data=Data|presets=Style presets|theme=Theme|light=Light|dark=Dark|auto=Auto|sepia=Sepia|midnight=Midnight|accent=Accent color|card=Card style|glass=Glass|solid=Solid|outline=Outline|r=Corner radius|fs=Text size|font=Font|bg=Background pattern|plain=Plain|dots=Dots|grid=Grid|lines=Lines|aurora=Aurora|stars=Stars|bgi=Background intensity|anim=Animations|rev=Reveal on scroll|prog=Scroll progress bar|tilt=3D cards|dense=Compact mode|hc=High contrast|cnt=Animated number count|glow=Cursor glow|lang=Language|cur=Currency|toman=Toman|rial=Rial|usd=USD|eur=EUR|dg=Digits|dg_auto=Default|dg_latn=Latin|dg_arab=Arabic|cal=Calendar|jal=Jalali|greg=Gregorian|per=Default view|per_m=Monthly|per_a=All time|sections=Sections & order|s_sum=Summary|s_chart=Charts|s_bud=Budgets|s_goal=Goals|s_tx=Transactions|warn=Budget warning (%)|export=Export JSON|csv=Export CSV|import=Import JSON|print=Print report|demo=Add sample data|clear=Clear transactions|reset=Reset settings|p_mint=Mint|p_paper=Paper|p_night=Nightfall|p_neon=Neon|p_ocean=Ocean|p_rose=Rose|t_saved=Saved|t_del=Deleted|t_undo=Undo|t_imp=Imported successfully|t_bad=Invalid file or text|t_rst=Settings reset|t_demo=Sample data added|t_clr=Transactions cleared|t_need=Enter a valid amount|t_sure=Press again to confirm|t_warn=You're close to this category's budget|t_over=You went over this category's budget|t_copy=Copied|copy=Copy|dl=Download|apply=Apply|pick=Choose file|paste=Paste JSON here|g1t=What is this?|g1d=Track income and expenses, set budgets and savings goals, and read charts and monthly insights, no account needed.|g2t=Adding transactions|g2d=Use the + button or press N. Enter type, amount, category, date, note and tag. Persian digits and thousands separators work too.|g3t=Months & calendar|g3d=Switch months with the header arrows or view all time. Choose Jalali or Gregorian in settings.|g4t=Budgets & alerts|g4d=Set a monthly cap per category; nearing the threshold turns the bar amber, passing it turns red.|g5t=Savings goals|g5d=Create a goal and deposit whenever you set money aside to see your progress.|g6t=Look & effects|g6d=5 themes, custom accent, 6 presets, 6 backdrops, 4 fonts, entrance animations, 3D cards and cursor glow.|g7t=Backups|g7d=Export JSON or CSV in Data, copy the text, and restore it later with Import JSON.|g8t=Shortcuts|g8d=N new transaction, / search, comma for settings, Esc to close.|k1=New transaction|k2=Search|k3=Settings|k4=Close"
+    )
+};
+
+const T = k => (L[S.lang] && L[S.lang][k]) ?? L.en[k] ?? k;
+
+const K = 'spendwise-v1';
+
+const C = [
+    ['food', 'food', 25, 'e'],
+    ['home', 'home', 210, 'e'],
+    ['car', 'car', 265, 'e'],
+    ['shop', 'bag', 320, 'e'],
+    ['health', 'heart', 350, 'e'],
+    ['fun', 'film', 285, 'e'],
+    ['edu', 'book', 190, 'e'],
+    ['bill', 'bolt', 45, 'e'],
+    ['travel', 'plane', 170, 'e'],
+    ['gift', 'gift', 10, 'b'],
+    ['salary', 'wallet', 150, 'i'],
+    ['freelance', 'spark', 200, 'i'],
+    ['invest', 'chart', 120, 'i'],
+    ['other', 'tag', 230, 'b']
+];
+
+const cm = Object.fromEntries(C.map(c => [c[0], c]));
+const catsFor = t => C.filter(c => c[3] == t || c[3] == 'b');
+
+const FN = [
+    'Vazirmatn',
+    'Noto Kufi Arabic',
+    'Noto Naskh Arabic',
+    'system-ui'
+];
+
+const PR = {
+    mint: {
+        theme: 'light',
+        h: 165,
+        s: 62,
+        l: 40,
+        bg: 'dots',
+        card: 'glass'
+    },
+    paper: {
+        theme: 'sepia',
+        h: 20,
+        s: 60,
+        l: 40,
+        bg: 'lines',
+        card: 'outline'
+    },
+    night: {
+        theme: 'midnight',
+        h: 190,
+        s: 90,
+        l: 55,
+        bg: 'stars',
+        card: 'glass'
+    },
+    neon: {
+        theme: 'dark',
+        h: 300,
+        s: 90,
+        l: 62,
+        bg: 'aurora',
+        card: 'glass'
+    },
+    ocean: {
+        theme: 'light',
+        h: 200,
+        s: 90,
+        l: 36,
+        bg: 'grid',
+        card: 'solid'
+    },
+    rose: {
+        theme: 'light',
+        h: 335,
+        s: 80,
+        l: 50,
+        bg: 'dots',
+        card: 'glass'
+    }
+};
+
+const DEF = {
+    theme: 'auto',
+    h: 165,
+    s: 62,
+    l: 40,
+    lang: 'fa',
+    r: 16,
+    fs: 1,
+    font: 0,
+    bg: 'dots',
+    bgi: .6,
+    card: 'glass',
+    anim: 1,
+    rev: 1,
+    prog: 1,
+    tilt: 0,
+    glow: 0,
+    dense: 0,
+    hc: 0,
+    cnt: 1,
+    cur: 'toman',
+    dg: 'auto',
+    cal: 'auto',
+    per: 'm',
+    warn: 80,
+    vis: {
+        sum: 1,
+        chart: 1,
+        bud: 1,
+        goal: 1,
+        tx: 1
+    },
+    ord: ['sum', 'chart', 'bud', 'goal', 'tx'],
+    tx: [],
+    bud: {},
+    goals: []
+};
+
+let S;
+
+try {
+    S = {
+        ...DEF,
+        ...JSON.parse(localStorage.getItem(K) || '{}')
+    };
+} catch (e) {
+    S = {
+        ...DEF
+    };
+}
+
+function norm() {
+    S.vis = {
+        ...DEF.vis,
+        ...(S.vis || {})
+    };
+
+    S.ord = [
+        ...(S.ord || []).filter(k => DEF.ord.includes(k)),
+        ...DEF.ord.filter(k => !(S.ord || []).includes(k))
+    ];
+
+    ['tx', 'goals'].forEach(k => {
+        if (!Array.isArray(S[k])) {
+            S[k] = [];
+        }
+    });
+
+    if (!S.bud || typeof S.bud != 'object') {
+        S.bud = {};
+    }
+}
+
+norm();
+
+const save = () => {
+    try {
+        localStorage.setItem(K, JSON.stringify(S));
+    } catch (e) {}
+};
+
+const esc = s =>
+    String(s).replace(
+        /[&<>"']/g,
+        c => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[c])
+    );
+
+const uid = () =>
+    Date.now().toString(36) +
+    Math.random().toString(36).slice(2, 6);
+
+const isJ = () =>
+    S.cal == 'auto'
+        ? S.lang == 'fa'
+        : S.cal == 'j';
+
+const loc = () =>
+    (S.lang == 'fa' ? 'fa-IR' : 'en-US') +
+    '-u-ca-' +
+    (isJ() ? 'persian' : 'gregory') +
+    (S.dg == 'latn'
+        ? '-nu-latn'
+        : S.dg == 'arab'
+            ? '-nu-arab'
+            : '');
+
+const num = n =>
+    new Intl.NumberFormat(loc(), {
+        maximumFractionDigits:
+            S.cur == 'usd' || S.cur == 'eur'
+                ? 2
+                : 0
+    }).format(n);
+
+const money = n => num(n) + ' ' + T(S.cur);
+
+const toEn = s =>
+    String(s)
+        .replace(
+            /[۰-۹]/g,
+            d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)
+        )
+        .replace(
+            /[٠-٩]/g,
+            d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)
+        )
+        .replace(/٫/g, '.')
+        .replace(/[٬,،\s]/g, '');
+
+const pn = s => {
+    const v = parseFloat(toEn(s));
+    return isFinite(v) ? v : NaN;
+};
+
+const iso = d => {
+    const z = new Date(
+        d.getTime() -
+        d.getTimezoneOffset() * 6e4
+    );
+
+    return z.toISOString().slice(0, 10);
+};
+
+const dt = s => new Date(s + 'T12:00:00');
+
+const addD = (d, n) => {
+    const x = new Date(d);
+    x.setDate(x.getDate() + n);
+    return x;
+};
+
+const mk = d => {
+    const p = new Intl.DateTimeFormat(
+        'en-u-ca-' +
+        (isJ() ? 'persian' : 'gregory') +
+        '-nu-latn',
+        {
+            year: 'numeric',
+            month: 'numeric'
+        }
+    ).formatToParts(d);
+
+    return (
+        p.find(x => x.type == 'year').value +
+        '-' +
+        p.find(x => x.type == 'month').value
+    );
+};
+
+const fd = s =>
+    new Intl.DateTimeFormat(loc(), {
+        day: 'numeric',
+        month: 'short'
+    }).format(dt(s));
+
+let anc = new Date(),
+    all = S.per == 'a',
+    F = {
+        t: 'all',
+        q: '',
+        c: '',
+        s: 'new'
+    },
+    ed = null,
+    fm = {
+        t: 'e',
+        c: 'food'
+    },
+    first = true,
+    tab = 'look',
+    gview = false,
+    armed = null;
+
+function shift(n) {
+    let d = new Date(anc),
+        k = mk(d);
+
+    while (mk(d) == k) {
+        d = addD(d, n);
+    }
+
+    anc = d;
+
+    if (n < 0) {}
+
+    render();
+}
+
+function span() {
+    let d = new Date(anc),
+        k = mk(d),
+        n = 0,
+        e = 0,
+        now = new Date();
+
+    while (mk(addD(d, -1)) == k) {
+        d = addD(d, -1);
+    }
+
+    while (mk(d) == k) {
+        n++;
+
+        if (d <= now) {
+            e++;
+        }
+
+        d = addD(d, 1);
+    }
+
+    return {
+        n,
+        e
+    };
+}
+
+function apply() {
+    const R = document.documentElement;
+
+    const t =
+        S.theme == 'auto'
+            ? (
+                matchMedia(
+                    '(prefers-color-scheme:dark)'
+                ).matches
+                    ? 'dark'
+                    : 'light'
+            )
+            : S.theme;
+
+    R.dataset.t = t;
+    R.lang = S.lang;
+    R.dir = S.lang == 'fa' ? 'rtl' : 'ltr';
+    R.dataset.card = S.card;
+
+    [
+        ['anim'],
+        ['rev'],
+        ['prog'],
+        ['tilt'],
+        ['glow'],
+        ['dense'],
+        ['hc']
+    ].forEach(([k]) => {
+        R.dataset[k] = S[k] ? 'on' : 'off';
+    });
+
+    const st = R.style;
+
+    st.setProperty(
+        '--ac',
+        `hsl(${S.h} ${S.s}% ${S.l}%)`
+    );
+
+    st.setProperty(
+        '--ac2',
+        `hsl(${(S.h + 40) % 360} ${S.s}% ${Math.min(S.l + 12, 68)}%)`
+    );
+
+    st.setProperty('--r', S.r + 'px');
+    st.setProperty('--fs', S.fs);
+    st.setProperty('--bgi', S.bgi);
+
+    st.setProperty(
+        '--f',
+        `'${FN[S.font] || FN[0]}','Vazirmatn',system-ui,sans-serif`
+    );
+
+    $('#bg').className = 'bg-' + S.bg;
+}
+
+matchMedia(
+    '(prefers-color-scheme:dark)'
+).addEventListener(
+    'change',
+    () => {
+        apply();
+    }
+);
+
+function toast(m, fn) {
+    const e = document.createElement('div');
+
+    e.className = 'tt';
+
+    e.innerHTML = `<span>${esc(m)}</span>`;
+
+    if (fn) {
+        const b = document.createElement('button');
+
+        b.textContent = T('t_undo');
+
+        b.onclick = () => {
+            fn();
+            e.remove();
+        };
+
+        e.append(b);
+    }
+
+    $('#ts').append(e);
+
+    setTimeout(
+        () => e.remove(),
+        fn ? 5000 : 2600
+    );
+}
+
+const arm = k => {
+    if (armed == k) {
+        return true;
+    }
+
+    armed = k;
+
+    toast(T('t_sure'));
+
+    setTimeout(() => {
+        if (armed == k) {
+            armed = null;
+        }
+    }, 3000);
+
+    return false;
+};
+
+function stat(P) {
+    const sum = t =>
+        P
+            .filter(x => x.t == t)
+            .reduce((a, x) => a + x.a, 0);
+
+    const I = sum('i');
+    const E = sum('e');
+
+    return {
+        I,
+        E,
+        B: I - E
+    };
+}
+
+const cbub = (c, s = '') => {
+    const x = cm[c] || cm.other;
+
+    return `<span class="cb" style="--h:${x[2]};${s}">${ic(x[1])}</span>`;
+};
+
+function render() {
+    const k = mk(anc);
+
+    const P = S.tx.filter(
+        x => all || mk(dt(x.d)) == k
+    );
+
+    const {
+        I,
+        E,
+        B
+    } = stat(P);
+
+    const Ex = P.filter(x => x.t == 'e');
+
+    $('#mt').textContent =
+        all
+            ? T('full')
+            : new Intl.DateTimeFormat(loc(), {
+                month: 'long',
+                year: 'numeric'
+            }).format(anc);
+
+    $('#ba').classList.toggle('on', all);
+
+    $('#b1').disabled =
+        $('#b2').disabled =
+        all;
+
+    const byC = {};
+
+    Ex.forEach(
+        x =>
+            byC[x.c] =
+            (byC[x.c] || 0) + x.a
+    );
+
+    const cats = Object.entries(byC).sort(
+        (a, b) => b[1] - a[1]
+    );
+
+    const H = {
+        sum: () => {
+            const sp = span();
+            const cur = !all && sp.e < sp.n;
+            const top = cats[0];
+            const big = Ex
+                .slice()
+                .sort((a, b) => b.a - a.a)[0];
+
+            const ins = [];
+
+            ins.push([
+                'clock' in IC ? '' : 'calendar',
+                T('avgd'),
+                Ex.length && !all
+                    ? money(
+                        E /
+                        Math.max(sp.e, 1)
+                    )
+                    : '—',
+                'calendar'
+            ]);
+
+            ins.push([
+                '',
+                T('topc'),
+                top
+                    ? T(top[0])
+                    : '—',
+                top
+                    ? cm[top[0]]?.[1] || 'tag'
+                    : 'tag'
+            ]);
+
+            ins.push([
+                '',
+                T('proj'),
+                cur && E
+                    ? money(
+                        E /
+                        Math.max(sp.e, 1) *
+                        sp.n
+                    )
+                    : '—',
+                'target'
+            ]);
+
+            ins.push([
+                '',
+                T('bigx'),
+                big
+                    ? esc(
+                        big.n ||
+                        T(big.c)
+                    ) +
+                    ' · ' +
+                    money(big.a)
+                    : '—',
+                'bolt'
+            ]);
+
+            return `
+                <div class="hero">
+                    <div class="bal">
+                        ${ic('coin').replace(
+                            'class="ic"',
+                            'class="ic cn"'
+                        )}
+                        ${ic('coin').replace(
+                            'class="ic"',
+                            'class="ic cn"'
+                        )}
+                        <small>${T('bal')}</small>
+                        <b
+                            class="cu"
+                            data-k="B"
+                            data-v="${B}"
+                        ></b>
+                    </div>
+
+                    <div class="kp">
+                        <div class="ki up">
+                            <span
+                                class="cb"
+                                style="--h:150"
+                            >
+                                ${ic('down')}
+                            </span>
+
+                            <div>
+                                <small>${T('inc')}</small>
+                                <b
+                                    class="cu"
+                                    data-k="I"
+                                    data-v="${I}"
+                                ></b>
+                            </div>
+                        </div>
+
+                        <div
+                            class="ki dn"
+                            style="animation-delay:.1s"
+                        >
+                            <span
+                                class="cb"
+                                style="--h:350"
+                            >
+                                ${ic('up')}
+                            </span>
+
+                            <div>
+                                <small>${T('exp')}</small>
+                                <b
+                                    class="cu"
+                                    data-k="E"
+                                    data-v="${E}"
+                                ></b>
+                            </div>
+                        </div>
+
+                        <div
+                            class="ki"
+                            style="animation-delay:.2s"
+                        >
+                            <span
+                                class="cb"
+                                style="--h:200"
+                            >
+                                ${ic('pie')}
+                            </span>
+
+                            <div>
+                                <small>${T('sav')}</small>
+                                <b>
+                                    ${
+                                        I > 0
+                                            ? num(
+                                                Math.round(
+                                                    B / I * 100
+                                                )
+                                            ) +
+                                            '٪'.replace(
+                                                '٪',
+                                                S.lang == 'fa'
+                                                    ? '٪'
+                                                    : '%'
+                                            )
+                                            : '—'
+                                    }
+                                </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="margin-top:18px">
+                    ${ic('spark')}${T('ins')}
+                </h2>
+
+                <div
+                    class="ig"
+                    style="margin-top:0"
+                >
+                    ${ins.map(
+                        (x, i) => `
+                            <div
+                                class="ki"
+                                style="animation-delay:${i * .08}s"
+                            >
+                                <span
+                                    class="cb"
+                                    style="--h:${200 + i * 40}"
+                                >
+                                    ${ic(x[3])}
+                                </span>
+
+                                <div>
+                                    <small>${x[1]}</small>
+                                    <b>${x[2]}</b>
+                                </div>
+                            </div>
+                        `
+                    ).join('')}
+                </div>
+            `;
+        },
+
+        chart: () => {
+            const tot = E || 1;
+            let acc = 0;
+            const C0 = 251.33;
+
+            const dn = cats.length
+                ? `
+                    <svg
+                        viewBox="0 0 100 100"
+                        class="dn2"
+                        width="150"
+                        height="150"
+                        style="transform:rotate(-90deg)"
+                    >
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="40"
+                            fill="none"
+                            stroke="var(--ln)"
+                            stroke-width="12"
+                            style="animation:none"
+                        />
+
+                        ${
+                            cats
+                                .map(([c, v]) => {
+                                    const l =
+                                        v / tot * C0;
+
+                                    const s = `
+                                        <circle
+                                            cx="50"
+                                            cy="50"
+                                            r="40"
+                                            fill="none"
+                                            stroke="hsl(${cm[c]?.[2] ?? 230} 70% 52%)"
+                                            stroke-width="12"
+                                            stroke-dasharray="${Math.max(l - 1.5, .5)} ${C0}"
+                                            stroke-dashoffset="${-acc}"
+                                        />
+                                    `;
+
+                                    acc += l;
+
+                                    return s;
+                                })
+                                .join('')
+                        }
+                    </svg>
+                `
+                : `
+                    <div
+                        class="em"
+                        style="padding:10px"
+                    >
+                        ${ic('pie')}${T('nodata')}
+                    </div>
+                `;
+
+            const ms = [];
+            let d = new Date(anc);
+
+            for (let i = 0; i < 6; i++) {
+                const kk = mk(d);
+
+                const m = S.tx.filter(
+                    x => mk(dt(x.d)) == kk
+                );
+
+                const s = stat(m);
+
+                ms.unshift({
+                    d: new Date(d),
+                    ...s
+                });
+
+                while (mk(d) == kk) {
+                    d = addD(d, -1);
+                }
+            }
+
+            const mx = Math.max(
+                1,
+                ...ms.map(m =>
+                    Math.max(m.I, m.E)
+                )
+            );
+
+            const bw = 26;
+
+            const bars = ms
+                .map((m, i) => {
+                    const x = i * 54 + 8;
+                    const h1 = m.I / mx * 80;
+                    const h2 = m.E / mx * 80;
+
+                    return `
+                        <rect
+                            x="${x}"
+                            y="${90 - h1}"
+                            width="${bw / 2 - 1}"
+                            height="${h1}"
+                            rx="3"
+                            fill="hsl(150 65% 45%)"
+                            style="animation-delay:${i * 80}ms"
+                        />
+
+                        <rect
+                            x="${x + bw / 2}"
+                            y="${90 - h2}"
+                            width="${bw / 2 - 1}"
+                            height="${h2}"
+                            rx="3"
+                            fill="hsl(350 75% 55%)"
+                            style="animation-delay:${i * 80 + 40}ms"
+                        />
+
+                        <text
+                            x="${x + bw / 2}"
+                            y="102"
+                        >
+                            ${new Intl.DateTimeFormat(
+                                loc(),
+                                {
+                                    month: 'short'
+                                }
+                            ).format(m.d)}
+                        </text>
+                    `;
+                })
+                .join('');
+
+            return `
+                <h2>
+                    ${ic('pie')}${T('byc')}
+                </h2>
+
+                <div class="chs">
+                    ${dn}
+
+                    <div class="lgd">
+                        ${cats
+                            .slice(0, 6)
+                            .map(
+                                ([c, v]) => `
+                                    <div>
+                                        <i
+                                            style="--h:${cm[c]?.[2] ?? 230}"
+                                        ></i>
+
+                                        <span>${T(c)}</span>
+
+                                        <span>
+                                            ${num(
+                                                Math.round(
+                                                    v / tot * 100
+                                                )
+                                            )}
+                                            ${S.lang == 'fa'
+                                                ? '٪'
+                                                : '%'}
+                                        </span>
+                                    </div>
+                                `
+                            )
+                            .join('')}
+                    </div>
+                </div>
+
+                <p class="sub">
+                    ${ic('chart')} ${T('trend')}
+                </p>
+
+                <svg
+                    class="brs"
+                    viewBox="0 0 330 108"
+                    width="100%"
+                >
+                    ${bars}
+                </svg>
+            `;
+        },
+
+        bud: () => {
+            const mm = S.tx.filter(
+                x =>
+                    x.t == 'e' &&
+                    mk(dt(x.d)) == k
+            );
+
+            const sp = {};
+
+            mm.forEach(
+                x =>
+                    sp[x.c] =
+                    (sp[x.c] || 0) + x.a
+            );
+
+            const ids = [
+                ...new Set([
+                    ...Object.keys(S.bud),
+                    ...Object.keys(sp)
+                ])
+            ].filter(c => cm[c]);
+
+            const rows = ids
+                .map(c => {
+                    const l = S.bud[c] || 0;
+                    const s = sp[c] || 0;
+                    const p = l
+                        ? s / l * 100
+                        : 0;
+
+                    const cl =
+                        p >= 100
+                            ? 'ov'
+                            : p >= S.warn
+                                ? 'wn'
+                                : '';
+
+                    return `
+                        <div class="br">
+                            ${cbub(c)}
+
+                            <div class="bh">
+                                <b>${T(c)}</b>
+                                <span>
+                                    ${money(s)}
+                                    ${
+                                        l
+                                            ? ' / ' +
+                                              money(l)
+                                            : ''
+                                    }
+                                </span>
+                            </div>
+
+                            <div>
+                                <div class="bar ${cl}">
+                                    <i
+                                        style="--w:${Math.min(p, 100)}%"
+                                    ></i>
+                                </div>
+
+                                <div
+                                    class="bh"
+                                    style="margin-top:6px;font-size:.72rem;color:var(--mu)"
+                                >
+                                    <span>
+                                        ${
+                                            l
+                                                ? (
+                                                    s > l
+                                                        ? T('over') +
+                                                          ': ' +
+                                                          money(
+                                                              s - l
+                                                          )
+                                                        : T('left') +
+                                                          ': ' +
+                                                          money(
+                                                              l - s
+                                                          )
+                                                )
+                                                : T('nobud')
+                                        }
+                                    </span>
+
+                                    <input
+                                        class="in2"
+                                        data-bc="${c}"
+                                        inputmode="decimal"
+                                        placeholder="${T('limit')}"
+                                        value="${
+                                            l
+                                                ? esc(
+                                                    num(l).replace(
+                                                        /[٬,]/g,
+                                                        ''
+                                                    )
+                                                )
+                                                : ''
+                                        }"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+
+            return `
+                <h2>
+                    ${ic('bell')}${T('bud')}
+                    <em>
+                        ${new Intl.DateTimeFormat(
+                            loc(),
+                            {
+                                month: 'long'
+                            }
+                        ).format(anc)}
+                    </em>
+                </h2>
+
+                ${
+                    rows ||
+                    `
+                        <div class="em">
+                            ${ic('bell')}${T('nobud')}
+                        </div>
+                    `
+                }
+
+                <div class="add">
+                    <select id="bs">
+                        ${C
+                            .filter(c => c[3] != 'i')
+                            .map(
+                                c =>
+                                    `<option value="${c[0]}">${T(c[0])}</option>`
+                            )
+                            .join('')}
+                    </select>
+
+                    <input
+                        id="bl"
+                        inputmode="decimal"
+                        placeholder="${T('limit')}"
+                    >
+
+                    <button
+                        class="bt pb"
+                        data-a="badd"
+                    >
+                        ${ic('plus')}
+                    </button>
+                </div>
+            `;
+        },
+
+        goal: () =>
+            `
+                <h2>
+                    ${ic('target')}${T('goals')}
+                </h2>
+
+                <div class="gl">
+                    ${
+                        S.goals
+                            .map((g, i) => {
+                                const p =
+                                    Math.min(
+                                        100,
+                                        g.s / g.t * 100
+                                    );
+
+                                const C0 =
+                                    2 * Math.PI * 26;
+
+                                return `
+                                    <div
+                                        class="gc"
+                                        style="animation-delay:${i * 80}ms"
+                                    >
+                                        <div class="gt">
+                                            <b>${esc(g.n)}</b>
+
+                                            <button
+                                                class="ib dg"
+                                                style="width:30px;height:30px"
+                                                data-a="gdel"
+                                                data-id="${g.id}"
+                                            >
+                                                ${ic('x')}
+                                            </button>
+                                        </div>
+
+                                        <div class="rg">
+                                            <svg
+                                                width="64"
+                                                height="64"
+                                                viewBox="0 0 64 64"
+                                                style="transform:rotate(-90deg)"
+                                            >
+                                                <circle
+                                                    cx="32"
+                                                    cy="32"
+                                                    r="26"
+                                                    fill="none"
+                                                    stroke="var(--ln)"
+                                                    stroke-width="7"
+                                                />
+
+                                                <circle
+                                                    cx="32"
+                                                    cy="32"
+                                                    r="26"
+                                                    fill="none"
+                                                    stroke="var(--ac)"
+                                                    stroke-width="7"
+                                                    stroke-linecap="round"
+                                                    stroke-dasharray="${C0 * p / 100} ${C0}"
+                                                    style="animation:gd 1.1s both"
+                                                />
+                                            </svg>
+
+                                            <div>
+                                                <b style="font-size:1.1rem">
+                                                    ${num(Math.round(p))}
+                                                    ${S.lang == 'fa'
+                                                        ? '٪'
+                                                        : '%'}
+                                                </b>
+
+                                                <small
+                                                    style="display:block;color:var(--mu)"
+                                                >
+                                                    ${money(g.s)}
+                                                    /
+                                                    ${money(g.t)}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            style="display:flex;gap:6px"
+                                        >
+                                            <input
+                                                data-gi="${g.id}"
+                                                inputmode="decimal"
+                                                placeholder="${T('dep')}"
+                                            >
+
+                                            <button
+                                                class="bt pb sm"
+                                                data-a="gdep"
+                                                data-id="${g.id}"
+                                            >
+                                                ${ic('plus')}
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            })
+                            .join('') ||
+                        `
+                            <div class="em w">
+                                ${ic('target')}${T('nogoal')}
+                            </div>
+                        `
+                    }
+                </div>
+
+                <div class="add">
+                    <input
+                        id="gn"
+                        placeholder="${T('gname')}"
+                    >
+
+                    <input
+                        id="gt"
+                        inputmode="decimal"
+                        placeholder="${T('gtarget')}"
+                    >
+
+                    <button
+                        class="bt pb"
+                        data-a="gadd"
+                    >
+                        ${ic('plus')}
+                    </button>
+                </div>
+            `,
+
+        tx: () =>
+            `
+                <h2>
+                    ${ic('list')}${T('tx')}
+                    <em id="tc"></em>
+                </h2>
+
+                <div class="tb">
+                    <input
+                        id="fq"
+                        placeholder="${T('search')}"
+                        value="${esc(F.q)}"
+                    >
+
+                    ${
+                        ['all', 'i', 'e']
+                            .map(
+                                t =>
+                                    `
+                                        <button
+                                            class="ch ${F.t == t ? 'on' : ''}"
+                                            data-ft="${t}"
+                                        >
+                                            ${
+                                                t == 'all'
+                                                    ? T('all')
+                                                    : t == 'i'
+                                                        ? T('inc')
+                                                        : T('exp')
+                                            }
+                                        </button>
+                                    `
+                            )
+                            .join('')
+                    }
+
+                    <select id="fc">
+                        <option value="">
+                            ${T('cat')}
+                        </option>
+
+                        ${C
+                            .map(
+                                c =>
+                                    `
+                                        <option
+                                            value="${c[0]}"
+                                            ${
+                                                F.c == c[0]
+                                                    ? 'selected'
+                                                    : ''
+                                            }
+                                        >
+                                            ${T(c[0])}
+                                        </option>
+                                    `
+                            )
+                            .join('')}
+                    </select>
+
+                    <select id="fs">
+                        ${
+                            [
+                                ['new', 's_new'],
+                                ['old', 's_old'],
+                                ['big', 's_big']
+                            ]
+                                .map(
+                                    ([v, l]) =>
+                                        `
+                                            <option
+                                                value="${v}"
+                                                ${
+                                                    F.s == v
+                                                        ? 'selected'
+                                                        : ''
+                                                }
+                                            >
+                                                ${T(l)}
+                                            </option>
+                                        `
+                                )
+                                .join('')
+                        }
+                    </select>
+                </div>
+
+                <div id="tl"></div>
+            `
+    };
+
+    $('#main').innerHTML = S.ord
+        .filter(x => S.vis[x])
+        .map(
+            (x, i) =>
+                `
+                    <section
+                        class="cd rv ${x == 'sum' || x == 'tx' ? 'w' : ''}"
+                        style="--i:${i}"
+                    >
+                        ${H[x]()}
+                    </section>
+                `
+        )
+        .join('');
+
+    post();
+}
+
+const pv = {};
+
+function post() {
+    txList();
+
+    $$('.rv').forEach(e => {
+        if (
+            !first ||
+            !S.rev ||
+            !S.anim
+        ) {
+            e.classList.add('in');
+        } else {
+            io.observe(e);
+        }
+    });
+
+    first = false;
+
+    $$('.cu').forEach(e => {
+        const v = +e.dataset.v;
+        const k = e.dataset.k;
+        const f = pv[k] ?? 0;
+
+        pv[k] = v;
+
+        if (
+            !S.cnt ||
+            !S.anim ||
+            f === v
+        ) {
+            e.textContent = money(v);
+            return;
+        }
+
+        const t0 = performance.now();
+
+        const step = t => {
+            const p = Math.min(
+                1,
+                (t - t0) / 800
+            );
+
+            const q =
+                1 -
+                Math.pow(
+                    1 - p,
+                    3
+                );
+
+            e.textContent = money(
+                f + (v - f) * q
+            );
+
+            if (
+                p < 1 &&
+                e.isConnected
+            ) {
+                requestAnimationFrame(step);
+            }
+        };
+
+        requestAnimationFrame(step);
+    });
+}
+
+const io = new IntersectionObserver(
+    es =>
+        es.forEach(x => {
+            if (x.isIntersecting) {
+                x.target.classList.add('in');
+                io.unobserve(x.target);
+            }
+        }),
+    {
+        threshold: .06
+    }
+);
+
+function txList() {
+    const el = $('#tl');
+
+    if (!el) {
+        return;
+    }
+
+    const k = mk(anc);
+    const q = F.q.trim().toLowerCase();
+
+    let L2 = S.tx.filter(
+        x =>
+            (all || mk(dt(x.d)) == k) &&
+            (F.t == 'all' || x.t == F.t) &&
+            (!F.c || x.c == F.c) &&
+            (
+                !q ||
+                (
+                    (x.n || '') +
+                    ' ' +
+                    (x.g || '') +
+                    ' ' +
+                    T(x.c)
+                )
+                    .toLowerCase()
+                    .includes(q)
+            )
+    );
+
+    L2.sort(
+        (a, b) =>
+            F.s == 'big'
+                ? b.a - a.a
+                : F.s == 'old'
+                    ? a.d.localeCompare(b.d)
+                    : b.d.localeCompare(a.d) || 0
+    );
+
+    $('#tc').textContent = num(L2.length);
+
+    el.innerHTML = L2.length
+        ? L2
+            .map(
+                (x, i) =>
+                    `
+                        <div
+                            class="tr"
+                            style="--k:${Math.min(i, 20)}"
+                        >
+                            ${cbub(x.c)}
+
+                            <div class="mid">
+                                <b>
+                                    ${esc(x.n || T(x.c))}
+
+                                    ${
+                                        x.g
+                                            ? `<span class="tag">${esc(x.g)}</span>`
+                                            : ''
+                                    }
+                                </b>
+
+                                <small>
+                                    ${T(x.c)}
+                                    ·
+                                    ${fd(x.d)}
+                                </small>
+                            </div>
+
+                            <span class="am ${x.t}">
+                                ${x.t == 'i' ? '+' : '−'}
+                                ${money(x.a)}
+                            </span>
+
+                            <div class="ac">
+                                <button
+                                    class="st ${x.f ? 'on' : ''}"
+                                    data-a="star"
+                                    data-id="${x.id}"
+                                >
+                                    ${ic('star')}
+                                </button>
+
+                                <button
+                                    data-a="edit"
+                                    data-id="${x.id}"
+                                >
+                                    ${ic('edit')}
+                                </button>
+
+                                <button
+                                    class="dl"
+                                    data-a="del"
+                                    data-id="${x.id}"
+                                >
+                                    ${ic('trash')}
+                                </button>
+                            </div>
+                        </div>
+                    `
+            )
+            .join('')
+        : `
+            <div class="em">
+                ${ic('inbox')}${T('empty')}
+            </div>
+        `;
+}
+
+const style = document.createElement('style');
+
+style.textContent =
+    '@keyframes gd{from{stroke-dasharray:0 200}}';
+
+document.head.append(style);
+
+function modal(h) {
+    $('#md').innerHTML = `<div class="mb">${h}</div>`;
+    $('#md').classList.add('on');
+}
+
+function closeM() {
+    $('#md').classList.remove('on');
+}
+
+$('#md').addEventListener(
+    'mousedown',
+    e => {
+        if (e.target.id == 'md') {
+            closeM();
+        }
+    }
+);
+
+function openTx(id) {
+    ed = id || null;
+
+    const x =
+        id &&
+        S.tx.find(v => v.id == id);
+
+    fm = x
+        ? {
+            t: x.t,
+            c: x.c
+        }
+        : {
+            t: 'e',
+            c: 'food'
+        };
+
+    modal(`
+        <h3>
+            ${ic('plus')}
+            ${T(x ? 'edit' : 'add')}
+        </h3>
+
+        <div class="sg" id="ftt"></div>
+
+        <label>
+            ${T('amt')}
+            <input
+                id="fa"
+                inputmode="decimal"
+                value="${x ? esc(String(x.a)) : ''}"
+                autocomplete="off"
+            >
+        </label>
+
+        <div
+            class="cg"
+            id="fcg"
+        ></div>
+
+        <div class="r2">
+            <label>
+                ${T('date')}
+                <input
+                    type="date"
+                    id="fdt"
+                    value="${
+                        x
+                            ? x.d
+                            : iso(
+                                all
+                                    ? new Date()
+                                    : anc
+                            )
+                    }"
+                >
+            </label>
+
+            <label>
+                ${T('tag')}
+                <input
+                    id="ftg"
+                    value="${x ? esc(x.g || '') : ''}"
+                >
+            </label>
+        </div>
+
+        <label>
+            ${T('note')}
+            <input
+                id="fnn"
+                value="${x ? esc(x.n || '') : ''}"
+            >
+        </label>
+
+        <div class="ra">
+            <button
+                class="bt"
+                data-a="cx"
+            >
+                ${T('cancel')}
+            </button>
+
+            <button
+                class="bt pb"
+                data-a="sv"
+            >
+                ${ic('check')}${T('save')}
+            </button>
+        </div>
+    `);
+
+    fmr();
+
+    setTimeout(
+        () => $('#fa').focus(),
+        50
+    );
+}
+
+function fmr() {
+    $('#ftt').innerHTML = ['e', 'i']
+        .map(
+            t =>
+                `
+                    <button
+                        class="${fm.t == t ? 'on' : ''}"
+                        data-tt="${t}"
+                    >
+                        ${T(
+                            t == 'e'
+                                ? 'exp'
+                                : 'inc'
+                        )}
+                    </button>
+                `
+        )
+        .join('');
+
+    const cs = catsFor(fm.t);
+
+    if (
+        !cs.some(
+            c => c[0] == fm.c
+        )
+    ) {
+        fm.c = cs[0][0];
+    }
+
+    $('#fcg').innerHTML = cs
+        .map(
+            c =>
+                `
+                    <button
+                        class="${fm.c == c[0] ? 'on' : ''}"
+                        data-cc="${c[0]}"
+                        style="--h:${c[2]}"
+                    >
+                        ${cbub(c[0])}
+                        <span>${T(c[0])}</span>
+                    </button>
+                `
+        )
+        .join('');
+}
+
+function saveTx() {
+    const a = pn($('#fa').value);
+
+    if (!(a > 0)) {
+        $('#fa').classList.add('sk');
+
+        setTimeout(
+            () =>
+                $('#fa').classList.remove(
+                    'sk'
+                ),
+            400
+        );
+
+        return toast(
+            T('t_need')
+        );
+    }
+
+    const d =
+        $('#fdt').value ||
+        iso(new Date());
+
+    const o = {
+        id: ed || uid(),
+        t: fm.t,
+        a,
+        c: fm.c,
+        d,
+        n: $('#fnn').value.trim(),
+        g: $('#ftg').value.trim()
+    };
+
+    if (ed) {
+        const i = S.tx.findIndex(
+            v => v.id == ed
+        );
+
+        o.f = S.tx[i]?.f;
+        S.tx[i] = o;
+    } else {
+        S.tx.unshift(o);
+    }
+
+    save();
+    closeM();
+    render();
+    toast(T('t_saved'));
+
+    if (
+        o.t == 'e' &&
+        S.bud[o.c]
+    ) {
+        const s = S.tx
+            .filter(
+                x =>
+                    x.t == 'e' &&
+                    x.c == o.c &&
+                    mk(dt(x.d)) ==
+                    mk(dt(o.d))
+            )
+            .reduce(
+                (p, x) => p + x.a,
+                0
+            );
+
+        const r =
+            s /
+            S.bud[o.c] *
+            100;
+
+        if (r >= 100) {
+            toast(T('t_over'));
+        } else if (r >= S.warn) {
+            toast(T('t_warn'));
+        }
+    }
+}
+
+const cp = t => {
+    const x =
+        document.createElement(
+            'textarea'
+        );
+
+    x.value = t;
+    document.body.append(x);
+    x.select();
+
+    try {
+        document.execCommand('copy');
+    } catch (e) {}
+
+    x.remove();
+};
+
+function csvText() {
+    return (
+        '\ufeff' +
+        'date,type,category,amount,note,tag\n' +
+        S.tx
+            .map(
+                x =>
+                    [
+                        x.d,
+                        x.t == 'i'
+                            ? 'income'
+                            : 'expense',
+                        x.c,
+                        x.a,
+                        x.n || '',
+                        x.g || ''
+                    ]
+                        .map(
+                            v =>
+                                '"' +
+                                String(v).replace(
+                                    /"/g,
+                                    '""'
+                                ) +
+                                '"'
+                        )
+                        .join(',')
+            )
+            .join('\n')
+    );
+}
+
+function openIO(m) {
+    const txt =
+        m == 'exp'
+            ? JSON.stringify(
+                {
+                    v: 1,
+                    tx: S.tx,
+                    bud: S.bud,
+                    goals: S.goals,
+                    settings:
+                        Object.fromEntries(
+                            Object.entries(S).filter(
+                                ([k]) =>
+                                    ![
+                                        'tx',
+                                        'bud',
+                                        'goals'
+                                    ].includes(k)
+                            )
+                        )
+                },
+                null,
+                1
+            )
+            : m == 'csv'
+                ? csvText()
+                : '';
+
+    modal(`
+        <h3>
+            ${ic(
+                m == 'imp'
+                    ? 'upload'
+                    : 'download'
+            )}
+            ${T(
+                m == 'exp'
+                    ? 'export'
+                    : m == 'csv'
+                        ? 'csv'
+                        : 'import'
+            )}
+        </h3>
+
+        <textarea
+            id="iot"
+            ${m == 'imp' ? '' : 'readonly'}
+            placeholder="${T('paste')}"
+        ></textarea>
+
+        <div class="ra">
+            ${
+                m == 'imp'
+                    ? `
+                        <button
+                            class="bt"
+                            data-a="pick"
+                        >
+                            ${ic('upload')}
+                            ${T('pick')}
+                        </button>
+
+                        <button
+                            class="bt pb"
+                            data-a="doimp"
+                        >
+                            ${ic('check')}
+                            ${T('apply')}
+                        </button>
+                    `
+                    : `
+                        <button
+                            class="bt"
+                            data-a="dlf"
+                            data-m="${m}"
+                        >
+                            ${ic('download')}
+                            ${T('dl')}
+                        </button>
+
+                        <button
+                            class="bt pb"
+                            data-a="cpy"
+                        >
+                            ${ic('check')}
+                            ${T('copy')}
+                        </button>
+                    `
+            }
+
+            <button
+                class="bt"
+                data-a="cx"
+            >
+                ${T('cancel')}
+            </button>
+        </div>
+    `);
+
+    $('#iot').value = txt;
+}
+
+function doImport(txt) {
+    try {
+        const o = JSON.parse(txt);
+        const arr =
+            Array.isArray(o)
+                ? o
+                : o.tx;
+
+        if (!Array.isArray(arr)) {
+            throw 0;
+        }
+
+        const tx = arr
+            .filter(
+                x =>
+                    x &&
+                    (x.t == 'i' ||
+                        x.t == 'e') &&
+                    +x.a > 0 &&
+                    /^\d{4}-\d\d-\d\d$/.test(
+                        x.d
+                    )
+            )
+            .map(
+                x => ({
+                    id: String(
+                        x.id || uid()
+                    ),
+                    t: x.t,
+                    a: +x.a,
+                    c: cm[x.c]
+                        ? x.c
+                        : 'other',
+                    d: x.d,
+                    n: String(
+                        x.n || ''
+                    ).slice(0, 120),
+                    g: String(
+                        x.g || ''
+                    ).slice(0, 30),
+                    f: x.f ? 1 : 0
+                })
+            );
+
+        S.tx = tx;
+
+        if (
+            o.bud &&
+            typeof o.bud == 'object' &&
+            !Array.isArray(o.bud)
+        ) {
+            S.bud =
+                Object.fromEntries(
+                    Object.entries(
+                        o.bud
+                    )
+                        .filter(
+                            ([c, v]) =>
+                                cm[c] &&
+                                +v > 0
+                        )
+                        .map(
+                            ([c, v]) => [
+                                c,
+                                +v
+                            ]
+                        )
+                );
+        }
+
+        if (
+            Array.isArray(o.goals)
+        ) {
+            S.goals =
+                o.goals
+                    .filter(
+                        g =>
+                            g &&
+                            +g.t > 0
+                    )
+                    .map(
+                        g => ({
+                            id: String(
+                                g.id ||
+                                uid()
+                            ),
+                            n: String(
+                                g.n || ''
+                            ).slice(
+                                0,
+                                60
+                            ),
+                            t: +g.t,
+                            s: Math.max(
+                                0,
+                                +g.s || 0
+                            )
+                        })
+                    );
+        }
+
+        if (o.settings) {
+            Object.keys(DEF).forEach(
+                k => {
+                    if (
+                        ![
+                            'tx',
+                            'bud',
+                            'goals'
+                        ].includes(k) &&
+                        k in o.settings
+                    ) {
+                        S[k] =
+                            o.settings[k];
+                    }
+                }
+            );
+        }
+
+        norm();
+        save();
+        apply();
+        build();
+        txt2();
+        render();
+        closeM();
+        toast(T('t_imp'));
+    } catch (e) {
+        toast(T('t_bad'));
+    }
+}
+
+function demo() {
+    let s = 7;
+
+    const r = () =>
+        (
+            s =
+            s * 16807 %
+            2147483647
+        ) / 2147483647;
+
+    const now = new Date();
+    const add = [];
+
+    const E = [
+        ['food', 90, 500],
+        ['car', 40, 300],
+        ['shop', 100, 900],
+        ['bill', 200, 700],
+        ['fun', 80, 400],
+        ['health', 60, 350],
+        ['edu', 100, 400],
+        ['travel', 300, 900],
+        ['gift', 50, 300],
+        ['home', 1500, 3000]
+    ];
+
+    for (let i = 0; i < 110; i++) {
+        const d = iso(
+            addD(
+                now,
+                -Math.floor(
+                    r() * 95
+                )
+            )
+        );
+
+        if (r() < .14) {
+            add.push({
+                id: uid(),
+                t: 'i',
+                a: Math.round(
+                    r() * 6000 + 4000
+                ),
+                c: [
+                    'salary',
+                    'freelance',
+                    'invest'
+                ][Math.floor(r() * 3)],
+                d,
+                n: '',
+                g: '',
+                f: 0
+            });
+        } else {
+            const e =
+                E[
+                    Math.floor(
+                        r() * E.length
+                    )
+                ];
+
+            add.push({
+                id: uid(),
+                t: 'e',
+                a: Math.round(
+                    (
+                        e[1] +
+                        r() *
+                        (e[2] - e[1])
+                    ) * 10
+                ),
+                c: e[0],
+                d,
+                n: '',
+                g: r() < .1
+                    ? '#'
+                    : '',
+                f: 0
+            });
+        }
+    }
+
+    add.forEach(x => {
+        if (x.t == 'i') {
+            x.a *= 1000;
+        } else {
+            x.a *= 100;
+        }
+
+        if (x.g == '#') {
+            x.g = '';
+        }
+    });
+
+    S.tx = [
+        ...add,
+        ...S.tx
+    ];
+
+    if (
+        !Object.keys(S.bud).length
+    ) {
+        S.bud = {
+            food: 9e5,
+            fun: 4e5,
+            shop: 12e5
+        };
+    }
+
+    if (!S.goals.length) {
+        S.goals = [
+            {
+                id: uid(),
+                n:
+                    S.lang == 'fa'
+                        ? 'سفر تابستان'
+                        : 'Summer trip',
+                t: 3e7,
+                s: 9e6
+            }
+        ];
+    }
+
+    save();
+    render();
+    toast(T('t_demo'));
+}
+
+const TABS = [
+    ['look', 'palette'],
+    ['bg', 'layers'],
+    ['ui', 'sliders'],
+    ['units', 'globe'],
+    ['content', 'list'],
+    ['data', 'download']
+];
+
+const o = (...a) =>
+    a.map(x => [x, x]);
+
+const DF = {
+    look: [
+        [
+            'sun',
+            'theme',
+            's',
+            o(
+                'light',
+                'dark',
+                'auto',
+                'sepia',
+                'midnight'
+            )
+        ],
+        [
+            'palette',
+            'accent',
+            'a'
+        ],
+        [
+            'spark',
+            'presets',
+            'p'
+        ],
+        [
+            'layers',
+            'card',
+            's',
+            o(
+                'glass',
+                'solid',
+                'outline'
+            )
+        ],
+        [
+            'corner',
+            'r',
+            'r',
+            0,
+            30,
+            2
+        ],
+        [
+            'type',
+            'fs',
+            'r',
+            .85,
+            1.3,
+            .05
+        ],
+        [
+            'type',
+            'font',
+            's',
+            [
+                [0, 'Vazirmatn'],
+                [1, 'Noto Kufi Arabic'],
+                [2, 'Noto Naskh Arabic'],
+                [3, 'system-ui']
+            ]
+        ]
+    ],
+
+    bg: [
+        [
+            'layers',
+            'bg',
+            's',
+            [
+                ['none', 'plain'],
+                ...o(
+                    'dots',
+                    'grid',
+                    'lines',
+                    'aurora',
+                    'stars'
+                )
+            ]
+        ],
+        [
+            'sun',
+            'bgi',
+            'r',
+            .1,
+            1,
+            .05
+        ]
+    ],
+
+    ui: [
+        ['spark', 'anim', 'w'],
+        ['up', 'rev', 'w'],
+        ['chart', 'prog', 'w'],
+        ['layers', 'tilt', 'w'],
+        ['sun', 'glow', 'w'],
+        ['list', 'dense', 'w'],
+        ['eye', 'hc', 'w'],
+        ['coin', 'cnt', 'w'],
+        [
+            'globe',
+            'lang',
+            's',
+            [
+                ['fa', 'فارسی'],
+                ['en', 'English']
+            ]
+        ]
+    ],
+
+    units: [
+        [
+            'coin',
+            'cur',
+            's',
+            o(
+                'toman',
+                'rial',
+                'usd',
+                'eur'
+            )
+        ],
+        [
+            'type',
+            'dg',
+            's',
+            [
+                ['auto', 'dg_auto'],
+                ['latn', 'dg_latn'],
+                ['arab', 'dg_arab']
+            ]
+        ],
+        [
+            'calendar',
+            'cal',
+            's',
+            [
+                ['auto', 'auto'],
+                ['j', 'jal'],
+                ['g', 'greg']
+            ]
+        ],
+        [
+            'calendar',
+            'per',
+            's',
+            [
+                ['m', 'per_m'],
+                ['a', 'per_a']
+            ]
+        ]
+    ],
+
+    content: [
+        ['list', 'sections', 'o'],
+        [
+            'bell',
+            'warn',
+            'r',
+            50,
+            100,
+            5
+        ]
+    ],
+
+    data: []
+};
+
+function build() {
+    const keepScroll = $('#pan').scrollTop;
+
+    const gen = it => {
+        const [
+            i,
+            k,
+            t,
+            a,
+            b,
+            c
+        ] = it;
+
+        const h = `
+            <p>
+                ${ic(i)}
+                ${T(k)}
+                <span
+                    class="vl"
+                    id="v-${k}"
+                ></span>
+            </p>
+        `;
+
+        if (t == 's') {
+            return `
+                <div class="gp">
+                    ${h}
+
+                    <div class="sg">
+                        ${a
+                            .map(
+                                ([v, l]) =>
+                                    `
+                                        <button
+                                            data-k="${k}"
+                                            data-v="${v}"
+                                        >
+                                            ${T(l)}
+                                        </button>
+                                    `
+                            )
+                            .join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        if (t == 'r') {
+            return `
+                <div class="gp">
+                    ${h}
+
+                    <input
+                        type="range"
+                        data-k="${k}"
+                        min="${a}"
+                        max="${b}"
+                        step="${c}"
+                    >
+                </div>
+            `;
+        }
+
+        if (t == 'w') {
+            return `
+                <div class="gp swr">
+                    <p>
+                        ${ic(i)}
+                        ${T(k)}
+                    </p>
+
+                    <button
+                        class="sw"
+                        data-sw="${k}"
+                        role="switch"
+                    ></button>
+                </div>
+            `;
+        }
+
+        if (t == 'a') {
+            return `
+                <div class="gp">
+                    ${h}
+
+                    <input
+                        type="range"
+                        data-k="h"
+                        min="0"
+                        max="360"
+                    >
+
+                    <input
+                        type="range"
+                        data-k="s"
+                        min="30"
+                        max="100"
+                    >
+
+                    <input
+                        type="range"
+                        data-k="l"
+                        min="28"
+                        max="70"
+                    >
+                </div>
+            `;
+        }
+
+        if (t == 'p') {
+            return `
+                <div class="gp">
+                    ${h}
+
+                    <div class="pre">
+                        ${Object.entries(PR)
+                            .map(
+                                ([n, v]) =>
+                                    `
+                                        <button
+                                            data-pr="${n}"
+                                            style="background:linear-gradient(135deg,hsl(${v.h} ${v.s}% ${v.l}%),hsl(${(v.h + 40) % 360} ${v.s}% ${Math.min(v.l + 12, 68)}%))"
+                                        >
+                                            ${T('p_' + n)}
+                                        </button>
+                                    `
+                            )
+                            .join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        if (t == 'o') {
+            return `
+                <div class="gp">
+                    ${h}
+
+                    <div
+                        class="ol"
+                        id="ol"
+                    ></div>
+                </div>
+            `;
+        }
+    };
+
+    const dataP = `
+        <div class="dtb">
+            ${
+                [
+                    ['download', 'export', 'exp'],
+                    ['download', 'csv', 'csvx'],
+                    ['upload', 'import', 'imp'],
+                    ['print', 'print', 'prt'],
+                    ['spark', 'demo', 'demo'],
+                    ['trash', 'clear', 'clr'],
+                    ['reset', 'reset', 'rst']
+                ]
+                    .map(
+                        ([i, l, a]) =>
+                            `
+                                <button
+                                    class="bt ${
+                                        a == 'clr' ||
+                                        a == 'rst'
+                                            ? 'dg'
+                                            : ''
+                                    }"
+                                    data-a="${a}"
+                                >
+                                    ${ic(i)}
+                                    ${T(l)}
+                                </button>
+                            `
+                    )
+                    .join('')
+            }
+        </div>
+
+        <div class="gp">
+            <p>
+                ${ic('kbd')}
+                ${T('g8t')}
+            </p>
+
+            <div class="ks">
+                ${
+                    [
+                        ['k1', 'N'],
+                        ['k2', '/'],
+                        ['k3', ','],
+                        ['k4', 'Esc']
+                    ]
+                        .map(
+                            ([k, v]) =>
+                                `
+                                    <div>
+                                        <span>${T(k)}</span>
+                                        <kbd>${v}</kbd>
+                                    </div>
+                                `
+                        )
+                        .join('')
+                }
+            </div>
+        </div>
+    `;
+
+    $('#pan').innerHTML = `
+        <h3>
+            <span>
+                ${ic('sliders')}
+                ${T('settings')}
+
+                <button
+                    class="ib"
+                    style="width:30px;height:30px"
+                    data-a="guide"
+                >
+                    ${ic('info')}
+                </button>
+            </span>
+
+            <button
+                class="ib"
+                style="width:34px;height:34px"
+                data-a="gear"
+            >
+                ${ic('x')}
+            </button>
+        </h3>
+
+        <input
+            id="sq"
+            placeholder="${T('ssearch')}"
+        >
+
+        <div id="sbody">
+            <div class="tabs">
+                ${
+                    TABS
+                        .map(
+                            ([k, i]) =>
+                                `
+                                    <button
+                                        data-tab="${k}"
+                                    >
+                                        ${ic(i)}
+                                        <span>
+                                            ${T('t_' + k)}
+                                        </span>
+                                    </button>
+                                `
+                        )
+                        .join('')
+                }
+            </div>
+
+            ${
+                TABS
+                    .map(
+                        ([k]) =>
+                            `
+                                <div
+                                    class="pane"
+                                    data-pane="${k}"
+                                >
+                                    ${
+                                        k == 'data'
+                                            ? dataP
+                                            : DF[k]
+                                                .map(gen)
+                                                .join('')
+                                    }
+                                </div>
+                            `
+                    )
+                    .join('')
+            }
+        </div>
+
+        <div
+            id="gv"
+            style="display:none"
+        >
+            <button
+                class="bt"
+                data-a="guide"
+            >
+                ${ic('chevl')}
+                ${T('g_back')}
+            </button>
+
+            ${
+                [1, 2, 3, 4, 5, 6, 7, 8]
+                    .map(
+                        n =>
+                            `
+                                <div
+                                    class="gi"
+                                    style="--i:${n}"
+                                >
+                                    <span
+                                        class="cb"
+                                        style="--h:${n * 40}"
+                                    >
+                                        ${
+                                            ic(
+                                                [
+                                                    'info',
+                                                    'plus',
+                                                    'calendar',
+                                                    'bell',
+                                                    'target',
+                                                    'palette',
+                                                    'download',
+                                                    'kbd'
+                                                ][n - 1]
+                                            )
+                                        }
+                                    </span>
+
+                                    <div>
+                                        <b>
+                                            ${T(
+                                                'g' +
+                                                n +
+                                                't'
+                                            )}
+                                        </b>
+
+                                        <p>
+                                            ${T(
+                                                'g' +
+                                                n +
+                                                'd'
+                                            )}
+                                        </p>
+                                    </div>
+                                </div>
+                            `
+                    )
+                    .join('')
+            }
+        </div>
+    `;
+
+    olist();
+    mark();
+    $('#pan').scrollTop = keepScroll;
+}
+
+function olist() {
+    const e = $('#ol');
+
+    if (!e) {
+        return;
+    }
+
+    e.innerHTML = S.ord
+        .map(
+            (k, i) =>
+                `
+                    <div>
+                        <b>${T('s_' + k)}</b>
+
+                        <button
+                            class="m"
+                            data-mv="${i}:-1"
+                            ${i ? '' : 'disabled'}
+                        >
+                            ${ic('up')}
+                        </button>
+
+                        <button
+                            class="m"
+                            data-mv="${i}:1"
+                            ${
+                                i <
+                                S.ord.length - 1
+                                    ? ''
+                                    : 'disabled'
+                            }
+                        >
+                            ${ic('down')}
+                        </button>
+
+                        <button
+                            class="sw ${
+                                S.vis[k]
+                                    ? 'on'
+                                    : ''
+                            }"
+                            data-vk="${k}"
+                            role="switch"
+                        ></button>
+                    </div>
+                `
+        )
+        .join('');
+}
+
+function mark() {
+    $$('#pan [data-k][data-v]').forEach(
+        b =>
+            b.classList.toggle(
+                'on',
+                String(S[b.dataset.k]) ==
+                b.dataset.v
+            )
+    );
+
+    $$('#pan input[type=range]').forEach(
+        r => {
+            r.value = S[r.dataset.k];
+
+            const v =
+                $('#v-' + r.dataset.k);
+
+            if (v) {
+                const k = r.dataset.k;
+
+                v.textContent =
+                    k == 'r'
+                        ? num(S.r) + 'px'
+                        : k == 'fs' ||
+                          k == 'bgi'
+                            ? num(
+                                Math.round(
+                                    S[k] * 100
+                                )
+                            ) + '%'
+                            : k == 'warn'
+                                ? num(
+                                    S.warn
+                                ) + '%'
+                                : '';
+            }
+        }
+    );
+
+    $$('#pan [data-sw]').forEach(
+        b =>
+            b.classList.toggle(
+                'on',
+                !!S[b.dataset.sw]
+            )
+    );
+
+    $$(
+        '#pan [data-tab]'
+    ).forEach(
+        b =>
+            b.classList.toggle(
+                'on',
+                b.dataset.tab == tab
+            )
+    );
+
+    $$(
+        '#pan [data-pane]'
+    ).forEach(
+        p =>
+            p.classList.toggle(
+                'on',
+                p.dataset.pane == tab
+            )
+    );
+}
+
+function txt2() {
+    $$('[data-i]').forEach(
+        e =>
+            (e.textContent = T(
+                e.dataset.i
+            ))
+    );
+
+    document.title = T('app');
+
+    $('#lgi').innerHTML =
+        ic('wallet');
+
+    $('#b1').innerHTML =
+        ic(
+            S.lang == 'fa'
+                ? 'chevr'
+                : 'chevl'
+        );
+
+    $('#b2').innerHTML =
+        ic(
+            S.lang == 'fa'
+                ? 'chevl'
+                : 'chevr'
+        );
+
+    $('#ba').innerHTML =
+        ic('calendar');
+
+    $('#gear').innerHTML =
+        ic('sliders');
+
+    $('#fab').innerHTML =
+        ic('plus');
+}
+
+function setK(k, v) {
+    S[k] = v;
+
+    if (k == 'per') {
+        all = v == 'a';
+    }
+
+    save();
+    apply();
+    mark();
+
+    if (k == 'lang') {
+        build();
+        txt2();
+    }
+
+    if (
+        [
+            'theme',
+            'bg',
+            'card',
+            'font',
+            'r',
+            'fs',
+            'bgi',
+            'h',
+            's',
+            'l',
+            'tilt',
+            'glow',
+            'prog',
+            'hc',
+            'anim',
+            'rev',
+            'dense'
+        ].includes(k) &&
+        k != 'dense' &&
+        !['lang'].includes(k)
+    ) {
+        if (
+            [
+                'theme',
+                'card',
+                'tilt',
+                'glow',
+                'prog',
+                'hc',
+                'anim',
+                'rev',
+                'bg',
+                'font',
+                'r',
+                'fs',
+                'bgi',
+                'h',
+                's',
+                'l'
+            ].includes(k)
+        ) {
+            return;
+        }
+    }
+
+    render();
+}
+
+document.addEventListener(
+    'click',
+    e => {
+        const t = e.target;
+
+        const b = t.closest(
+            '[data-a],[data-k][data-v],[data-sw],[data-vk],[data-mv],[data-pr],[data-tab],[data-ft],[data-tt],[data-cc]'
+        );
+
+        if (!b) {
+            return;
+        }
+
+        const D = b.dataset;
+
+        if (
+            D.k &&
+            D.v !== undefined
+        ) {
+            const n =
+                ['font'].includes(D.k)
+                    ? +D.v
+                    : D.v;
+
+            return setK(
+                D.k,
+                n
+            );
+        }
+
+        if (D.sw) {
+            return setK(
+                D.sw,
+                S[D.sw] ? 0 : 1
+            );
+        }
+
+        if (D.vk) {
+            S.vis[D.vk] =
+                !S.vis[D.vk];
+
+            save();
+            olist();
+
+            return render();
+        }
+
+        if (D.mv) {
+            const [i, n] =
+                D.mv
+                    .split(':')
+                    .map(Number);
+
+            const j = i + n;
+
+            if (
+                j < 0 ||
+                j >= S.ord.length
+            ) {
+                return;
+            }
+
+            [
+                S.ord[i],
+                S.ord[j]
+            ] = [
+                S.ord[j],
+                S.ord[i]
+            ];
+
+            save();
+            olist();
+
+            return render();
+        }
+
+        if (D.pr) {
+            Object.assign(
+                S,
+                PR[D.pr]
+            );
+
+            save();
+            apply();
+            mark();
+
+            return render();
+        }
+
+        if (D.tab) {
+            tab = D.tab;
+            return mark();
+        }
+
+        if (D.ft) {
+            F.t = D.ft;
+
+            $$('.ch').forEach(
+                c =>
+                    c.classList.toggle(
+                        'on',
+                        c.dataset.ft ==
+                        F.t
+                    )
+            );
+
+            return txList();
+        }
+
+        if (D.tt) {
+            fm.t = D.tt;
+            return fmr();
+        }
+
+        if (D.cc) {
+            fm.c = D.cc;
+            return fmr();
+        }
+
+        const a = D.a;
+        const id = D.id;
+
+        const A = {
+            mp: () => shift(-1),
+
+            mn: () => shift(1),
+
+            ma: () => {
+                all = !all;
+                render();
+            },
+
+            new: () => openTx(),
+
+            edit: () => openTx(id),
+
+            cx: closeM,
+
+            sv: saveTx,
+
+            gear: () => {
+                $('#pan').classList.toggle(
+                    'on'
+                );
+            },
+
+            guide: () => {
+                gview = !gview;
+
+                $('#gv').style.display =
+                    gview
+                        ? 'block'
+                        : 'none';
+
+                $('#sbody').style.display =
+                    gview
+                        ? 'none'
+                        : 'block';
+
+                $('#sq').style.display =
+                    gview
+                        ? 'none'
+                        : 'block';
+            },
+
+            star: () => {
+                const x = S.tx.find(
+                    v => v.id == id
+                );
+
+                if (x) {
+                    x.f = x.f ? 0 : 1;
+                    save();
+                    txList();
+                }
+            },
+
+            del: () => {
+                const i =
+                    S.tx.findIndex(
+                        v => v.id == id
+                    );
+
+                if (i < 0) {
+                    return;
+                }
+
+                const x = S.tx[i];
+
+                S.tx.splice(i, 1);
+                save();
+                render();
+
+                toast(
+                    T('t_del'),
+                    () => {
+                        S.tx.splice(
+                            Math.min(
+                                i,
+                                S.tx.length
+                            ),
+                            0,
+                            x
+                        );
+
+                        save();
+                        render();
+                    }
+                );
+            },
+
+            badd: () => {
+                const v =
+                    pn($('#bl').value);
+
+                if (!(v > 0)) {
+                    return toast(
+                        T('t_need')
+                    );
+                }
+
+                S.bud[
+                    $('#bs').value
+                ] = v;
+
+                save();
+                render();
+            },
+
+            gadd: () => {
+                const n =
+                    $('#gn').value.trim();
+
+                const v =
+                    pn($('#gt').value);
+
+                if (
+                    !n ||
+                    !(v > 0)
+                ) {
+                    return toast(
+                        T('t_need')
+                    );
+                }
+
+                S.goals.push({
+                    id: uid(),
+                    n,
+                    t: v,
+                    s: 0
+                });
+
+                save();
+                render();
+            },
+
+            gdep: () => {
+                const g =
+                    S.goals.find(
+                        v => v.id == id
+                    );
+
+                const i =
+                    $(
+                        `[data-gi="${id}"]`
+                    );
+
+                const v = pn(
+                    i.value
+                );
+
+                if (
+                    !g ||
+                    !(v > 0)
+                ) {
+                    return toast(
+                        T('t_need')
+                    );
+                }
+
+                g.s += v;
+
+                save();
+                render();
+
+                toast(
+                    T('t_saved')
+                );
+            },
+
+            gdel: () => {
+                S.goals =
+                    S.goals.filter(
+                        v => v.id != id
+                    );
+
+                save();
+                render();
+            },
+
+            exp: () =>
+                openIO('exp'),
+
+            csvx: () =>
+                openIO('csv'),
+
+            imp: () =>
+                openIO('imp'),
+
+            prt: () => {
+                try {
+                    window.print();
+                } catch (e) {}
+            },
+
+            demo,
+
+            clr: () => {
+                if (!arm('clr')) {
+                    return;
+                }
+
+                S.tx = [];
+
+                save();
+                render();
+
+                toast(
+                    T('t_clr')
+                );
+            },
+
+            rst: () => {
+                if (!arm('rst')) {
+                    return;
+                }
+
+                const keep = {
+                    tx: S.tx,
+                    bud: S.bud,
+                    goals: S.goals
+                };
+
+                S = {
+                    ...DEF,
+                    ...keep
+                };
+
+                norm();
+                save();
+                apply();
+                build();
+                txt2();
+                render();
+
+                toast(
+                    T('t_rst')
+                );
+            },
+
+            cpy: () => {
+                $('#iot').select();
+
+                cp(
+                    $('#iot').value
+                );
+
+                toast(
+                    T('t_copy')
+                );
+            },
+
+            dlf: () => {
+                try {
+                    const csv =
+                        D.m == 'csv';
+
+                    const u =
+                        URL.createObjectURL(
+                            new Blob(
+                                [
+                                    $('#iot')
+                                        .value
+                                ],
+                                {
+                                    type: csv
+                                        ? 'text/csv'
+                                        : 'application/json'
+                                }
+                            )
+                        );
+
+                    const l =
+                        document.createElement(
+                            'a'
+                        );
+
+                    l.href = u;
+
+                    l.download =
+                        csv
+                            ? 'expenses.csv'
+                            : 'expenses.json';
+
+                    l.click();
+
+                    setTimeout(
+                        () =>
+                            URL.revokeObjectURL(
+                                u
+                            ),
+                        2000
+                    );
+                } catch (x) {
+                    cp(
+                        $('#iot').value
+                    );
+
+                    toast(
+                        T('t_copy')
+                    );
+                }
+            },
+
+            pick: () =>
+                $('#imp').click(),
+
+            doimp: () =>
+                doImport(
+                    $('#iot').value
+                )
+        };
+
+        A[a] &&
+            A[a]();
+    }
+);
+
+$('#imp').addEventListener(
+    'change',
+    e => {
+        const f =
+            e.target.files[0];
+
+        if (!f) {
+            return;
+        }
+
+        const r =
+            new FileReader();
+
+        r.onload = () => {
+            $('#iot').value =
+                r.result;
+        };
+
+        r.readAsText(f);
+
+        e.target.value = '';
+    }
+);
+
+document.addEventListener(
+    'input',
+    e => {
+        const t = e.target;
+
+        if (
+            t.matches(
+                '#pan input[type=range]'
+            )
+        ) {
+            S[t.dataset.k] =
+                parseFloat(
+                    t.value
+                );
+
+            save();
+            apply();
+            mark();
+
+            if (
+                t.dataset.k == 'warn'
+            ) {
+                render();
+            }
+
+            return;
+        }
+
+        if (t.id == 'fq') {
+            F.q = t.value;
+            txList();
+        }
+
+        if (t.id == 'sq') {
+            const q =
+                t.value
+                    .trim()
+                    .toLowerCase();
+
+            $('.tabs').style.display =
+                q ? 'none' : 'grid';
+
+            $$('.pane').forEach(
+                p =>
+                    p.classList.toggle(
+                        'on',
+                        !!q ||
+                        p.dataset.pane ==
+                        tab
+                    )
+            );
+
+            $$('#pan .gp').forEach(
+                g =>
+                    (g.style.display =
+                        !q ||
+                        g.textContent
+                            .toLowerCase()
+                            .includes(q)
+                            ? ''
+                            : 'none')
+            );
+        }
+    }
+);
+
+document.addEventListener(
+    'change',
+    e => {
+        const t = e.target;
+
+        if (t.id == 'fc') {
+            F.c = t.value;
+            txList();
+        }
+
+        if (t.id == 'fs') {
+            F.s = t.value;
+            txList();
+        }
+
+        if (t.dataset.bc) {
+            const v =
+                pn(t.value);
+
+            if (v > 0) {
+                S.bud[
+                    t.dataset.bc
+                ] = v;
+            } else if (
+                t.value.trim() === ''
+            ) {
+                delete S.bud[
+                    t.dataset.bc
+                ];
+            }
+
+            save();
+            render();
+        }
+    }
+);
+
+document.addEventListener(
+    'keydown',
+    e => {
+        const tg =
+            e.target.tagName;
+
+        const typing =
+            /INPUT|TEXTAREA|SELECT/.test(
+                tg
+            );
+
+        if (e.key == 'Escape') {
+            closeM();
+            $('#pan').classList.remove(
+                'on'
+            );
+            return;
+        }
+
+        if (
+            e.key == 'Enter' &&
+            $('#md').classList.contains(
+                'on'
+            ) &&
+            e.target.closest('.mb') &&
+            tg == 'INPUT' &&
+            $('#fa')
+        ) {
+            return saveTx();
+        }
+
+        if (
+            typing ||
+            e.ctrlKey ||
+            e.metaKey ||
+            e.altKey
+        ) {
+            return;
+        }
+
+        if (
+            e.key == 'n' ||
+            e.key == 'N'
+        ) {
+            e.preventDefault();
+            openTx();
+        } else if (
+            e.key == '/'
+        ) {
+            e.preventDefault();
+            $('#fq')?.focus();
+        } else if (
+            e.key == ','
+        ) {
+            $('#pan').classList.toggle(
+                'on'
+            );
+        }
+    }
+);
+
+addEventListener(
+    'scroll',
+    () => {
+        const h =
+            document.documentElement;
+
+        h.style.setProperty(
+            '--p',
+            h.scrollTop /
+            Math.max(
+                1,
+                h.scrollHeight -
+                h.clientHeight
+            )
+        );
+    },
+    {
+        passive: true
+    }
+);
+
+addEventListener(
+    'mousemove',
+    e => {
+        if (S.glow) {
+            const g = $('#gl');
+
+            g.style.transform =
+                `translate(${e.clientX}px,${e.clientY}px)`;
+        }
+
+        if (S.tilt) {
+            const c =
+                e.target.closest &&
+                e.target.closest('.cd');
+
+            $$('.cd').forEach(
+                x => {
+                    if (x !== c) {
+                        x.style.transform =
+                            '';
+                    }
+                }
+            );
+
+            if (
+                c &&
+                c.classList.contains(
+                    'in'
+                )
+            ) {
+                const r =
+                    c.getBoundingClientRect();
+
+                const px =
+                    (e.clientX -
+                        r.left) /
+                    r.width -
+                    .5;
+
+                const py =
+                    (e.clientY -
+                        r.top) /
+                    r.height -
+                    .5;
+
+                c.style.transform =
+                    `perspective(900px) rotateX(${(-py * 4).toFixed(2)}deg) rotateY(${(px * 4).toFixed(2)}deg)`;
+            }
+        }
+    }
+);
+
+apply();
+build();
+txt2();
+render();
