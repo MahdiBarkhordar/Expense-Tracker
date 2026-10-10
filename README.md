@@ -123,7 +123,7 @@ Press <kbd>,</kbd> (comma) to open the settings panel. It has its own search box
 | 📜 Reveal on scroll | Cards slide in as they enter the viewport |
 | 📏 Scroll progress bar | Thin gradient bar across the top |
 | 🧊 3D cards | Cards tilt toward your cursor |
-| 🔦 Cursor glow | A soft spotlight follows your mouse |
+| 🔦 Cursor glow | a soft spotlight follows your mouse |
 | 🔢 Animated counting | Numbers count up to their new value |
 | 📦 Compact mode | Tighter spacing for dense screens |
 | 👁️ High contrast | Stronger text and borders |
